@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sumi — Kana Trainer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;500;700;900&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#ECE5D5;
+    --paper-2:#E4DAC4;
+    --paper-line:#D8CCB2;
+    --sumi:#1C1B22;
+    --sumi-soft:#4A4838;
+    --ink:32,72,110;      /* ai indigo, used as rgb for alpha shading */
+    --ink-deep:#16314D;
+    --shu:#C2412A;        /* vermilion seal red */
+    --shu-soft:#D4694F;
+    --gold:#9A7B3F;
+    --good:#4E6B4A;
+    --serif:'Zen Old Mincho','Hiragino Mincho ProN','Yu Mincho',serif;
+    --sans:'Zen Kaku Gothic New','Hiragino Sans','Yu Gothic',system-ui,sans-serif;
+    --radius:3px;
+    --shadow:0 1px 0 rgba(0,0,0,.04), 0 8px 24px -16px rgba(28,27,34,.35);
+  }
+  :root.night{
+    --paper:#15171F;
+    --paper-2:#1D202B;
+    --paper-line:#2A2E3B;
+    --sumi:#E9E3D4;
+    --sumi-soft:#A9A48F;
+    --ink:120,170,225;
+    --ink-deep:#A9CDF2;
+    --shu:#E0654A;
+    --shu-soft:#E0654A;
+    --gold:#C9A864;
+    --good:#86B07E;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--paper);
+    color:var(--sumi);
+    font-family:var(--sans);
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+    background-image:
+      radial-gradient(rgba(0,0,0,.012) 1px, transparent 1px),
+      radial-gradient(rgba(0,0,0,.012) 1px, transparent 1px);
+    background-size:7px 7px, 7px 7px;
+    background-position:0 0, 3.5px 3.5px;
+    min-height:100vh;
+    transition:background-color .5s ease, color .5s ease;
+  }
+  .wrap{max-width:940px;margin:0 auto;padding:22px 18px 80px}
+
+  /* ---------- Header ---------- */
+  header.top{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:8px}
+  .brand{display:flex;align-items:center;gap:13px}
+  .seal{
+    width:46px;height:46px;flex:none;display:grid;place-items:center;
+    background:var(--shu);color:#F4ECDB;border-radius:5px;
+    font-family:var(--serif);font-weight:900;font-size:26px;
+    box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.18), 0 4px 14px -6px rgba(194,65,42,.7);
+    transform:rotate(-2deg);
+  }
+  .brand h1{font-family:var(--serif);font-weight:700;font-size:25px;margin:0;letter-spacing:.5px}
+  .brand p{margin:1px 0 0;font-size:12.5px;color:var(--sumi-soft);letter-spacing:.3px}
+  .top-spacer{flex:1}
+  .icon-btn{
+    border:1px solid var(--paper-line);background:var(--paper-2);color:var(--sumi);
+    border-radius:var(--radius);padding:8px 12px;font-family:var(--sans);font-size:13px;font-weight:500;
+    cursor:pointer;transition:.18s;display:inline-flex;align-items:center;gap:6px;
+  }
+  .icon-btn:hover{border-color:var(--sumi-soft)}
+  .icon-btn:focus-visible{outline:2px solid var(--shu);outline-offset:2px}
+
+  /* ---------- Controls bar ---------- */
+  .controls{
+    display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;
+    padding:12px 0 14px;border-bottom:1.5px solid var(--paper-line);margin-bottom:18px;
+  }
+  .seg{display:inline-flex;background:var(--paper-2);border:1px solid var(--paper-line);border-radius:var(--radius);overflow:hidden}
+  .seg button{
+    border:0;background:transparent;color:var(--sumi-soft);padding:7px 13px;cursor:pointer;
+    font-family:var(--sans);font-size:13px;font-weight:500;transition:.15s;
+  }
+  .seg button.on{background:var(--sumi);color:var(--paper)}
+  .seg button:not(.on):hover{color:var(--sumi)}
+  .seg button:focus-visible{outline:2px solid var(--shu);outline-offset:-2px}
+  .ctl-label{font-size:11.5px;text-transform:uppercase;letter-spacing:1.2px;color:var(--sumi-soft);margin-right:-6px}
+  .check{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--sumi);cursor:pointer;user-select:none}
+  .check input{accent-color:var(--shu);width:15px;height:15px}
+
+  /* ---------- Tabs ---------- */
+  nav.tabs{display:flex;gap:2px;margin-bottom:20px;flex-wrap:wrap}
+  nav.tabs button{
+    border:0;background:none;font-family:var(--sans);font-size:15px;font-weight:500;
+    color:var(--sumi-soft);padding:7px 2px;margin-right:22px;cursor:pointer;position:relative;
+    transition:color .15s;
+  }
+  nav.tabs button .jp{font-family:var(--serif);font-size:13px;opacity:.65;margin-left:5px}
+  nav.tabs button:hover{color:var(--sumi)}
+  nav.tabs button.on{color:var(--sumi)}
+  nav.tabs button.on::after{
+    content:"";position:absolute;left:0;right:0;bottom:-2px;height:2.5px;background:var(--shu);border-radius:2px;
+  }
+  nav.tabs button:focus-visible{outline:2px solid var(--shu);outline-offset:3px;border-radius:2px}
+
+  /* ---------- Stats strip ---------- */
+  .stats{display:flex;gap:26px;flex-wrap:wrap;margin-bottom:18px}
+  .stat .n{font-family:var(--serif);font-size:26px;font-weight:700;line-height:1}
+  .stat .l{font-size:11.5px;letter-spacing:.8px;text-transform:uppercase;color:var(--sumi-soft);margin-top:3px}
+  .stat .n .unit{font-size:14px;color:var(--sumi-soft);font-weight:500;margin-left:1px}
+
+  /* ---------- Chart / grid ---------- */
+  .grid-block{margin-bottom:26px}
+  .grid-block h3{
+    font-family:var(--serif);font-weight:500;font-size:14px;color:var(--sumi-soft);
+    margin:0 0 9px;letter-spacing:2px;text-transform:uppercase;
+    display:flex;align-items:center;gap:10px;
+  }
+  .grid-block h3::after{content:"";flex:1;height:1px;background:var(--paper-line)}
+  .kgrid{display:grid;gap:6px}
+  .kgrid.g5{grid-template-columns:repeat(5,1fr)}
+  .kgrid.g3{grid-template-columns:repeat(3,1fr)}
+  .cell{
+    aspect-ratio:1/1;border:1px solid var(--paper-line);border-radius:var(--radius);
+    background:var(--paper-2);display:flex;flex-direction:column;align-items:center;justify-content:center;
+    cursor:pointer;position:relative;overflow:hidden;transition:background-color .5s ease, transform .12s, border-color .15s;
+    padding:2px;
+  }
+  .cell.empty{visibility:hidden;cursor:default}
+  .cell:hover{transform:translateY(-2px);border-color:var(--sumi-soft)}
+  .cell:focus-visible{outline:2px solid var(--shu);outline-offset:2px}
+  .cell .ch{font-family:var(--serif);font-size:clamp(22px,5.4vw,34px);line-height:1;font-weight:500;z-index:1}
+  .cell .ro{font-size:11px;color:var(--sumi-soft);margin-top:3px;z-index:1;letter-spacing:.5px}
+  .cell.lit .ch{color:#F4ECDB}
+  .cell.lit .ro{color:rgba(244,236,219,.78)}
+  .cell .dots{position:absolute;top:5px;right:5px;display:flex;gap:2px;z-index:1}
+  .cell .dots i{width:4px;height:4px;border-radius:50%;background:var(--shu);display:block}
+  .cell.lit .dots i{background:#F4ECDB}
+
+  /* ---------- Detail drawer ---------- */
+  .drawer-bg{position:fixed;inset:0;background:rgba(20,18,14,.34);opacity:0;pointer-events:none;transition:.25s;z-index:40}
+  .drawer-bg.show{opacity:1;pointer-events:auto}
+  .drawer{
+    position:fixed;z-index:50;background:var(--paper);border:1px solid var(--paper-line);
+    box-shadow:0 24px 60px -22px rgba(20,18,14,.6);
+    right:18px;bottom:18px;width:330px;max-width:calc(100vw - 36px);
+    border-radius:6px;padding:22px;transform:translateY(16px);opacity:0;pointer-events:none;transition:.25s;
+  }
+  .drawer.show{transform:none;opacity:1;pointer-events:auto}
+  .drawer .big{font-family:var(--serif);font-size:84px;line-height:1;text-align:center;margin:4px 0 6px}
+  .drawer .roline{text-align:center;font-size:20px;font-weight:700;letter-spacing:1px;margin-bottom:2px}
+  .drawer .alt{text-align:center;font-size:12px;color:var(--sumi-soft);margin-bottom:14px}
+  .drawer .note{font-size:13.5px;background:var(--paper-2);border-left:3px solid var(--gold);padding:10px 12px;border-radius:2px;margin-bottom:14px}
+  .drawer .note b{color:var(--shu)}
+  .drawer-row{display:flex;gap:10px;align-items:center;margin-bottom:14px}
+  .speak-btn{flex:1;border:1px solid var(--paper-line);background:var(--paper-2);color:var(--sumi);border-radius:var(--radius);padding:10px;font-family:var(--sans);font-size:14px;font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:.15s}
+  .speak-btn:hover:not(:disabled){border-color:var(--shu);color:var(--shu)}
+  .speak-btn:disabled{opacity:.45;cursor:not-allowed}
+  .mastery-line{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--sumi-soft)}
+  .mdots{display:flex;gap:4px}
+  .mdots i{width:9px;height:9px;border-radius:50%;border:1.5px solid var(--shu)}
+  .mdots i.f{background:var(--shu)}
+  .drawer .close{position:absolute;top:12px;right:12px;border:0;background:none;font-size:20px;color:var(--sumi-soft);cursor:pointer;line-height:1}
+  .drawer .close:hover{color:var(--sumi)}
+
+  /* ---------- Study shared ---------- */
+  .pane{display:none}
+  .pane.on{display:block;animation:fade .35s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  .empty-msg{text-align:center;padding:60px 20px;color:var(--sumi-soft);font-size:15px}
+  .empty-msg .big{font-family:var(--serif);font-size:42px;color:var(--paper-line);margin-bottom:10px}
+
+  /* progress bar */
+  .pbar{height:4px;background:var(--paper-line);border-radius:2px;overflow:hidden;margin-bottom:22px}
+  .pbar i{display:block;height:100%;background:var(--shu);width:0;transition:width .3s}
+  .qcount{font-size:12.5px;color:var(--sumi-soft);text-align:center;margin-bottom:14px;letter-spacing:.5px}
+
+  /* ---------- Flashcards ---------- */
+  .card-stage{display:flex;flex-direction:column;align-items:center;gap:20px}
+  .flip{width:280px;height:300px;perspective:1200px;cursor:pointer}
+  .flip-inner{position:relative;width:100%;height:100%;transition:transform .5s cubic-bezier(.3,.8,.3,1.2);transform-style:preserve-3d}
+  .flip.flipped .flip-inner{transform:rotateY(180deg)}
+  .face{position:absolute;inset:0;backface-visibility:hidden;border:1px solid var(--paper-line);border-radius:8px;background:var(--paper-2);box-shadow:var(--shadow);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}
+  .face.back{transform:rotateY(180deg);background:var(--ink-deep);color:#F4ECDB;border-color:var(--ink-deep)}
+  .face .glyph{font-family:var(--serif);font-size:130px;line-height:1}
+  .face.back .glyph{font-size:62px;font-weight:700;letter-spacing:1px}
+  .face .hint{font-size:12.5px;color:var(--sumi-soft)}
+  .face.back .hint{color:rgba(244,236,219,.7)}
+  .face .tag{position:absolute;top:12px;left:14px;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--sumi-soft)}
+  .face.back .tag{color:rgba(244,236,219,.55)}
+  .card-actions{display:flex;gap:12px}
+  .btn{border:1px solid var(--paper-line);background:var(--paper-2);color:var(--sumi);border-radius:var(--radius);padding:11px 22px;font-family:var(--sans);font-size:14px;font-weight:500;cursor:pointer;transition:.15s}
+  .btn:hover{border-color:var(--sumi-soft)}
+  .btn:focus-visible{outline:2px solid var(--shu);outline-offset:2px}
+  .btn.good{border-color:var(--good);color:var(--good)}
+  .btn.good:hover{background:var(--good);color:var(--paper)}
+  .btn.again{border-color:var(--shu);color:var(--shu)}
+  .btn.again:hover{background:var(--shu);color:var(--paper)}
+  .btn.primary{background:var(--sumi);color:var(--paper);border-color:var(--sumi)}
+  .btn.primary:hover{background:var(--ink-deep);border-color:var(--ink-deep)}
+  .flip-tip{font-size:12px;color:var(--sumi-soft)}
+
+  /* ---------- Quiz ---------- */
+  .quiz-stage{max-width:480px;margin:0 auto}
+  .prompt{
+    background:var(--paper-2);border:1px solid var(--paper-line);border-radius:8px;
+    padding:34px 20px;text-align:center;margin-bottom:18px;box-shadow:var(--shadow);
+  }
+  .prompt .label{font-size:11.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--sumi-soft);margin-bottom:8px}
+  .prompt .q{font-family:var(--serif);font-size:96px;line-height:1}
+  .prompt .q.roman{font-size:60px;font-weight:700;letter-spacing:1px}
+  .choices{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .choice{
+    border:1px solid var(--paper-line);background:var(--paper-2);color:var(--sumi);border-radius:6px;
+    padding:18px;font-family:var(--serif);font-size:30px;cursor:pointer;transition:.13s;
+  }
+  .choice.roman{font-size:22px;font-weight:700;font-family:var(--sans)}
+  .choice:hover:not(:disabled){border-color:var(--sumi-soft);transform:translateY(-1px)}
+  .choice:focus-visible{outline:2px solid var(--shu);outline-offset:2px}
+  .choice:disabled{cursor:default}
+  .choice.correct{background:var(--good);color:#F4ECDB;border-color:var(--good)}
+  .choice.wrong{background:var(--shu);color:#F4ECDB;border-color:var(--shu)}
+  @keyframes shake{10%,90%{transform:translateX(-1px)}30%,70%{transform:translateX(3px)}50%{transform:translateX(-4px)}}
+  .choice.wrong{animation:shake .4s}
+
+  /* ---------- Recall (typing) ---------- */
+  .recall-stage{max-width:440px;margin:0 auto;text-align:center}
+  .recall-stage .glyph{font-family:var(--serif);font-size:130px;line-height:1;margin:10px 0 4px}
+  .recall-stage .sub{font-size:12.5px;color:var(--sumi-soft);margin-bottom:20px;height:16px}
+  .rinput{
+    width:100%;max-width:280px;border:0;border-bottom:2.5px solid var(--paper-line);background:transparent;
+    color:var(--sumi);font-family:var(--sans);font-size:32px;font-weight:500;text-align:center;
+    padding:8px 4px;outline:none;letter-spacing:2px;transition:border-color .2s;
+  }
+  .rinput:focus{border-color:var(--sumi-soft)}
+  .rinput.ok{border-color:var(--good);color:var(--good)}
+  .rinput.no{border-color:var(--shu);color:var(--shu)}
+  .reveal{height:24px;font-size:14px;margin:14px 0 18px;color:var(--sumi-soft)}
+  .reveal b{color:var(--shu);font-weight:700}
+
+  /* score chips */
+  .score{display:flex;justify-content:center;gap:20px;margin-top:8px;font-size:13px;color:var(--sumi-soft)}
+  .score b{font-family:var(--serif);font-size:18px;color:var(--sumi);font-weight:700;margin-right:3px}
+
+  footer{margin-top:46px;padding-top:18px;border-top:1px solid var(--paper-line);font-size:12px;color:var(--sumi-soft);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+  footer a{color:var(--shu);text-decoration:none}
+  .reset-link{background:none;border:0;color:var(--sumi-soft);cursor:pointer;font-size:12px;text-decoration:underline;font-family:var(--sans)}
+  .reset-link:hover{color:var(--shu)}
+
+  @media (max-width:560px){
+    .brand p{display:none}
+    nav.tabs button{margin-right:16px;font-size:14px}
+    .drawer{left:18px;right:18px;width:auto}
+    .flip{width:240px;height:260px}
+    .face .glyph{font-size:110px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <div class="seal" aria-hidden="true">墨</div>
+      <div>
+        <h1>Sumi</h1>
+        <p>Kana, soaked in &mdash; ひらがな &amp; カタカナ</p>
+      </div>
+    </div>
+    <div class="top-spacer"></div>
+    <button class="icon-btn" id="nightBtn" aria-label="Toggle night mode">🌙 <span id="nightLbl">Night</span></button>
+  </header>
+
+  <!-- Controls -->
+  <div class="controls">
+    <div class="seg" role="group" aria-label="Script">
+      <button data-script="h" class="on">ひらがな Hiragana</button>
+      <button data-script="k">カタカナ Katakana</button>
+    </div>
+    <span class="ctl-label">Include</span>
+    <label class="check"><input type="checkbox" id="setBasic" checked> Basic</label>
+    <label class="check"><input type="checkbox" id="setDaku"> Dakuten</label>
+    <label class="check"><input type="checkbox" id="setCombo"> Combos</label>
+  </div>
+
+  <!-- Tabs -->
+  <nav class="tabs" role="tablist">
+    <button data-mode="chart" class="on" role="tab">Chart<span class="jp">表</span></button>
+    <button data-mode="cards" role="tab">Cards<span class="jp">札</span></button>
+    <button data-mode="quiz" role="tab">Quiz<span class="jp">試</span></button>
+    <button data-mode="recall" role="tab">Recall<span class="jp">書</span></button>
+  </nav>
+
+  <!-- Stats -->
+  <div class="stats" id="stats"></div>
+
+  <!-- CHART -->
+  <section class="pane on" id="pane-chart">
+    <div id="chartArea"></div>
+  </section>
+
+  <!-- CARDS -->
+  <section class="pane" id="pane-cards">
+    <div class="qcount" id="cardsCount"></div>
+    <div class="card-stage" id="cardStage"></div>
+  </section>
+
+  <!-- QUIZ -->
+  <section class="pane" id="pane-quiz">
+    <div class="pbar"><i id="quizBar"></i></div>
+    <div class="quiz-stage" id="quizStage"></div>
+    <div class="score" id="quizScore"></div>
+  </section>
+
+  <!-- RECALL -->
+  <section class="pane" id="pane-recall">
+    <div class="recall-stage" id="recallStage"></div>
+    <div class="score" id="recallScore"></div>
+  </section>
+
+  <footer>
+    <span>Made with 墨 &mdash; deploy it to GitHub Pages or Vercel as a single file.</span>
+    <button class="reset-link" id="resetBtn">Reset all progress</button>
+  </footer>
+</div>
+
+<!-- Detail drawer -->
+<div class="drawer-bg" id="drawerBg"></div>
+<div class="drawer" id="drawer" role="dialog" aria-label="Character detail">
+  <button class="close" id="drawerClose" aria-label="Close">×</button>
+  <div class="big" id="dBig"></div>
+  <div class="roline" id="dRo"></div>
+  <div class="alt" id="dAlt"></div>
+  <div class="drawer-row">
+    <button class="speak-btn" id="dSpeak">🔊 Say it</button>
+  </div>
+  <div class="note" id="dNote"></div>
+  <div class="mastery-line">
+    Mastery <span class="mdots" id="dMastery"></span>
+    <span id="dSeen" style="margin-left:auto"></span>
+  </div>
+</div>
+
+<script>
+"use strict";
+
+/* =========================================================
+   DATA  — Hepburn romanization. accept[] holds alt typings.
+   Each entry: {id, h, k, r, accept[], type, note}
+   ========================================================= */
+
+// helper to build accept arrays for the few irregular ones
+const ALT = {
+  shi:['shi','si'], chi:['chi','ti'], tsu:['tsu','tu'], fu:['fu','hu'],
+  ji:['ji','zi'], wo:['wo','o'], n:['n','nn'],
+  sha:['sha','sya'], shu:['shu','syu'], sho:['sho','syo'],
+  cha:['cha','tya'], chu:['chu','tyu'], cho:['cho','tyo'],
+  ja:['ja','jya','zya'], ju:['ju','jyu','zyu'], jo:['jo','jyo','zyo']
+};
+function acc(r, override){ return override || ALT[r] || [r]; }
+
+// ---- BASIC gojūon (rows of 5, null = gap) ----
+const BASIC = [
+  [['a','あ','ア','a'],['i','い','イ','i'],['u','う','ウ','u'],['e','え','エ','e'],['o','お','オ','o']],
+  [['ka','か','カ','ka'],['ki','き','キ','ki'],['ku','く','ク','ku'],['ke','け','ケ','ke'],['ko','こ','コ','ko']],
+  [['sa','さ','サ','sa'],['shi','し','シ','shi'],['su','す','ス','su'],['se','せ','セ','se'],['so','そ','ソ','so']],
+  [['ta','た','タ','ta'],['chi','ち','チ','chi'],['tsu','つ','ツ','tsu'],['te','て','テ','te'],['to','と','ト','to']],
+  [['na','な','ナ','na'],['ni','に','ニ','ni'],['nu','ぬ','ヌ','nu'],['ne','ね','ネ','ne'],['no','の','ノ','no']],
+  [['ha','は','ハ','ha'],['hi','ひ','ヒ','hi'],['fu','ふ','フ','fu'],['he','へ','ヘ','he'],['ho','ほ','ホ','ho']],
+  [['ma','ま','マ','ma'],['mi','み','ミ','mi'],['mu','む','ム','mu'],['me','め','メ','me'],['mo','も','モ','mo']],
+  [['ya','や','ヤ','ya'],null,['yu','ゆ','ユ','yu'],null,['yo','よ','ヨ','yo']],
+  [['ra','ら','ラ','ra'],['ri','り','リ','ri'],['ru','る','ル','ru'],['re','れ','レ','re'],['ro','ろ','ロ','ro']],
+  [['wa','わ','ワ','wa'],null,null,null,['wo','を','ヲ','wo']],
+  [['n','ん','ン','n'],null,null,null,null]
+];
+
+// mnemonics for basic hiragana (memory aids, not rules)
+const MN = {
+  a:'Looks like a capital A with an extra loop.',
+  i:'Two strokes like the “ee” twins standing up.',
+  u:'A face in profile going “ooh.”',
+  e:'An energetic bird about to take off.',
+  o:'An “o” with a little tail kicking out.',
+  ka:'“Ka” is mosquito in Japanese — picture one biting.',
+  ki:'A key.',
+  ku:'A cuckoo’s open beak — “ku-ku.”',
+  ke:'A keg lying on its side.',
+  ko:'Two short coils stacked.',
+  sa:'A person sat down with a sigh.',
+  shi:'A fishing hook from below — “she” fishes.',
+  su:'A swirl, like a spring (su-pring).',
+  se:'A mouth opening to “say.”',
+  so:'A zig-zag, like sewing thread.',
+  ta:'A “t” crossed with an “a.”',
+  chi:'A cheerleader doing a kick.',
+  tsu:'A wave curling — a tsu-nami.',
+  te:'“Te” means hand — picture a hand.',
+  to:'A toe with a single nail.',
+  na:'A knot tied in rope.',
+  ni:'A bent knee.',
+  nu:'A strand of noodles.',
+  ne:'A cat’s curling tail (neko = cat).',
+  no:'A no-entry swirl.',
+  ha:'An “h” leaning on an “a.”',
+  hi:'A wide smile going “hee.”',
+  fu:'Mount Fuji with a little smoke.',
+  he:'A low hill on the horizon.',
+  ho:'Like は but with an extra bar.',
+  ma:'Mama with a bun in her hair.',
+  mi:'Looks like the number 21 — “me” said softly.',
+  mu:'A cow going “muu.”',
+  me:'“Me” means eye — picture an eye.',
+  mo:'A fish-hook with bait.',
+  ya:'A yak with horns.',
+  yu:'A unique fish swimming.',
+  yo:'A yo-yo on its string.',
+  ra:'A rabbit’s ear flopping.',
+  ri:'Two tall reeds side by side.',
+  ru:'A loop, like a route bending back.',
+  re:'A person bending at the waist.',
+  ro:'Like る but without the loop — a road.',
+  wa:'A swan saying “wah.”',
+  wo:'Carrying an object — を marks the object.',
+  n:'A single “n,” a soft hum at a word’s end.'
+};
+
+// ---- DAKUTEN / HANDAKUTEN ----
+const DAKU = [
+  [['ga','が','ガ','ga'],['gi','ぎ','ギ','gi'],['gu','ぐ','グ','gu'],['ge','げ','ゲ','ge'],['go','ご','ゴ','go']],
+  [['za','ざ','ザ','za'],['zi','じ','ジ','ji'],['zu','ず','ズ','zu'],['ze','ぜ','ゼ','ze'],['zo','ぞ','ゾ','zo']],
+  [['da','だ','ダ','da'],['dji','ぢ','ヂ','ji'],['dzu','づ','ヅ','zu'],['de','で','デ','de'],['do','ど','ド','do']],
+  [['ba','ば','バ','ba'],['bi','び','ビ','bi'],['bu','ぶ','ブ','bu'],['be','べ','ベ','be'],['bo','ぼ','ボ','bo']],
+  [['pa','ぱ','パ','pa'],['pi','ぴ','ピ','pi'],['pu','ぷ','プ','pu'],['pe','ぺ','ペ','pe'],['po','ぽ','ポ','po']]
+];
+const DAKU_ACC = { zi:['ji','zi'], dji:['ji','di','dji'], dzu:['zu','du','dzu'] };
+
+// ---- YŌON COMBOS ----
+const COMBO = [
+  [['kya','きゃ','キャ','kya'],['kyu','きゅ','キュ','kyu'],['kyo','きょ','キョ','kyo']],
+  [['sha','しゃ','シャ','sha'],['shu','しゅ','シュ','shu'],['sho','しょ','ショ','sho']],
+  [['cha','ちゃ','チャ','cha'],['chu','ちゅ','チュ','chu'],['cho','ちょ','チョ','cho']],
+  [['nya','にゃ','ニャ','nya'],['nyu','にゅ','ニュ','nyu'],['nyo','にょ','ニョ','nyo']],
+  [['hya','ひゃ','ヒャ','hya'],['hyu','ひゅ','ヒュ','hyu'],['hyo','ひょ','ヒョ','hyo']],
+  [['mya','みゃ','ミャ','mya'],['myu','みゅ','ミュ','myu'],['myo','みょ','ミョ','myo']],
+  [['rya','りゃ','リャ','rya'],['ryu','りゅ','リュ','ryu'],['ryo','りょ','リョ','ryo']],
+  [['gya','ぎゃ','ギャ','gya'],['gyu','ぎゅ','ギュ','gyu'],['gyo','ぎょ','ギョ','gyo']],
+  [['ja','じゃ','ジャ','ja'],['ju','じゅ','ジュ','ju'],['jo','じょ','ジョ','jo']],
+  [['bya','びゃ','ビャ','bya'],['byu','びゅ','ビュ','byu'],['byo','びょ','ビョ','byo']],
+  [['pya','ぴゃ','ピャ','pya'],['pyu','ぴゅ','ピュ','pyu'],['pyo','ぴょ','ピョ','pyo']]
+];
+
+// Build a flat lookup of all entries with id, type, accept, note
+const ALL = {}; // id -> entry
+function regGrid(grid, type){
+  grid.forEach(row=>row.forEach(c=>{
+    if(!c) return;
+    const [id,h,k,r] = c;
+    const accept = (type==='daku' ? (DAKU_ACC[id]||acc(r)) : acc(r));
+    ALL[id] = {id,h,k,r,accept,type};
+  }));
+}
+regGrid(BASIC,'basic'); regGrid(DAKU,'daku'); regGrid(COMBO,'combo');
+
+// construction notes for daku/combo (first-principles), mnemonics for basic
+function noteFor(id){
+  const e = ALL[id];
+  if(e.type==='basic'){
+    const m = MN[id]||'';
+    return m ? `<b>Hint:</b> ${m}` : '';
+  }
+  if(e.type==='daku'){
+    // find base kana by stripping the mark
+    const baseMap = {g:'k',z:'s',d:'t',b:'h',p:'h'};
+    const first = e.r[0];
+    const baseCons = baseMap[first];
+    const mark = (first==='p') ? '゜ (handakuten / maru)' : '゛ (dakuten / tenten)';
+    return `<b>Built from:</b> the ${baseCons}-row kana + ${mark}. The mark voices the sound (e.g. k→g, s→z, t→d, h→b or p).`;
+  }
+  // combo
+  return `<b>Built from:</b> a full-size i-column kana + a small ${e.h.slice(-1)} glide. Two kana written, but said as one beat.`;
+}
+
+/* =========================================================
+   STORAGE — localStorage with in-memory fallback
+   ========================================================= */
+const Store = (()=>{
+  let mem={}, ok=false;
+  try{ const t='__sumi_t'; localStorage.setItem(t,'1'); localStorage.removeItem(t); ok=true; }catch(e){ ok=false; }
+  return {
+    persistent: ok,
+    get(k,d){ try{ if(ok){const v=localStorage.getItem(k);return v==null?d:JSON.parse(v);} return (k in mem)?mem[k]:d; }catch(e){return d;} },
+    set(k,v){ try{ if(ok) localStorage.setItem(k,JSON.stringify(v)); else mem[k]=v; }catch(e){ mem[k]=v; } }
+  };
+})();
+
+/* =========================================================
+   STATE & PROGRESS
+   progress key = script:id  (hiragana & katakana tracked apart)
+   value = {streak, seen, correct}
+   mastery = clamp(streak,0,5)
+   ========================================================= */
+const PKEY='sumi_progress_v1';
+let progress = Store.get(PKEY, {});
+
+const state = {
+  script: Store.get('sumi_script','h'),
+  sets: Store.get('sumi_sets', {basic:true,daku:false,combo:false}),
+  mode: 'chart',
+  night: Store.get('sumi_night', false)
+};
+
+function pkey(script,id){ return script+':'+id; }
+function getP(script,id){ return progress[pkey(script,id)] || {streak:0,seen:0,correct:0}; }
+function mastery(script,id){ return Math.max(0,Math.min(5,getP(script,id).streak)); }
+function record(script,id,correct){
+  const k=pkey(script,id);
+  const p=progress[k]||{streak:0,seen:0,correct:0};
+  p.seen++;
+  if(correct){ p.correct++; p.streak=Math.min(5,p.streak+1); }
+  else { p.streak=Math.max(0,p.streak-1); }
+  progress[k]=p;
+  Store.set(PKEY,progress);
+}
+
+// pool of active entries based on script + checked sets
+function activeEntries(){
+  const out=[];
+  const want = state.sets;
+  for(const id in ALL){
+    const e=ALL[id];
+    if((e.type==='basic'&&want.basic)||(e.type==='daku'&&want.daku)||(e.type==='combo'&&want.combo)){
+      out.push(e);
+    }
+  }
+  return out;
+}
+
+/* =========================================================
+   SPEECH (Web Speech API) — graceful if no JP voice
+   ========================================================= */
+let jaVoice=null, speechReady=false;
+function loadVoices(){
+  if(!('speechSynthesis' in window)) return;
+  const vs = speechSynthesis.getVoices();
+  jaVoice = vs.find(v=>v.lang && v.lang.toLowerCase().startsWith('ja')) || null;
+  speechReady = vs.length>0;
+}
+if('speechSynthesis' in window){
+  loadVoices();
+  speechSynthesis.onvoiceschanged = loadVoices;
+}
+function speak(text){
+  if(!('speechSynthesis' in window)) return;
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang='ja-JP'; if(jaVoice) u.voice=jaVoice; u.rate=0.8;
+  speechSynthesis.cancel(); speechSynthesis.speak(u);
+}
+
+/* =========================================================
+   RENDER: CHART
+   ========================================================= */
+const chartArea=document.getElementById('chartArea');
+
+function cellHTML(e){
+  const ch = state.script==='h'?e.h:e.k;
+  const m = mastery(state.script,e.id);
+  // ink shading: alpha grows with mastery
+  const alpha = m===0?0: (0.16 + m*0.165); // up to ~0.99 at 5
+  const lit = m>=3;
+  const dots = m>0 ? '<span class="dots">'+'<i></i>'.repeat(Math.min(m,5))+'</span>' : '';
+  return `<button class="cell ${lit?'lit':''}" data-id="${e.id}"
+      style="background:${m===0?'var(--paper-2)':'rgba(var(--ink),'+alpha.toFixed(2)+')'}"
+      aria-label="${ch} (${e.r}), mastery ${m} of 5">
+      ${dots}<span class="ch">${ch}</span><span class="ro">${e.r}</span></button>`;
+}
+function emptyCell(){ return '<span class="cell empty" aria-hidden="true"></span>'; }
+
+function renderGrid(grid,cols){
+  let html='';
+  grid.forEach(row=>{
+    row.forEach(c=>{ html += c?cellHTML(ALL[c[0]]):emptyCell(); });
+  });
+  return `<div class="kgrid g${cols}">${html}</div>`;
+}
+
+function renderChart(){
+  let html='';
+  if(state.sets.basic){
+    html += `<div class="grid-block"><h3>Basic &mdash; 五十音 Gojūon</h3>${renderGrid(BASIC,5)}</div>`;
+  }
+  if(state.sets.daku){
+    html += `<div class="grid-block"><h3>Dakuten &amp; Handakuten &mdash; 濁音・半濁音</h3>${renderGrid(DAKU,5)}</div>`;
+  }
+  if(state.sets.combo){
+    html += `<div class="grid-block"><h3>Combos &mdash; 拗音 Yōon</h3>${renderGrid(COMBO,3)}</div>`;
+  }
+  if(!html) html = `<div class="empty-msg"><div class="big">表</div>Pick at least one set above to see the chart.</div>`;
+  chartArea.innerHTML=html;
+  chartArea.querySelectorAll('.cell[data-id]').forEach(b=>{
+    b.addEventListener('click',()=>openDrawer(b.dataset.id));
+  });
+}
+
+/* =========================================================
+   DRAWER
+   ========================================================= */
+const drawer=document.getElementById('drawer'), drawerBg=document.getElementById('drawerBg');
+function openDrawer(id){
+  const e=ALL[id]; const ch=state.script==='h'?e.h:e.k;
+  document.getElementById('dBig').textContent=ch;
+  document.getElementById('dRo').textContent=e.r;
+  const alts=e.accept.filter(a=>a!==e.r);
+  document.getElementById('dAlt').textContent = alts.length? 'also typed: '+alts.join(', '):'';
+  document.getElementById('dNote').innerHTML=noteFor(id);
+  const m=mastery(state.script,id);
+  document.getElementById('dMastery').innerHTML = Array.from({length:5},(_,i)=>`<i class="${i<m?'f':''}"></i>`).join('');
+  const p=getP(state.script,id);
+  document.getElementById('dSeen').textContent = p.seen? `${p.correct}/${p.seen} correct` : 'not yet drilled';
+  const sb=document.getElementById('dSpeak');
+  sb.disabled = !('speechSynthesis' in window);
+  sb.onclick=()=>speak(ch);
+  drawer.classList.add('show'); drawerBg.classList.add('show');
+}
+function closeDrawer(){ drawer.classList.remove('show'); drawerBg.classList.remove('show'); }
+document.getElementById('drawerClose').onclick=closeDrawer;
+drawerBg.onclick=closeDrawer;
+
+/* =========================================================
+   WEIGHTED PICK — favors low-mastery characters
+   ========================================================= */
+function weightedPick(pool, exclude){
+  const cand = exclude ? pool.filter(e=>e.id!==exclude.id) : pool;
+  // weight = 6 - mastery (so 0-mastery weight 6, mastered weight 1)
+  let total=0; const weights=cand.map(e=>{const w=6-mastery(state.script,e.id);total+=w;return w;});
+  let r=Math.random()*total;
+  for(let i=0;i<cand.length;i++){ r-=weights[i]; if(r<=0) return cand[i]; }
+  return cand[cand.length-1];
+}
+function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
+
+/* =========================================================
+   FLASHCARDS
+   ========================================================= */
+const cardStage=document.getElementById('cardStage'), cardsCount=document.getElementById('cardsCount');
+let deck=[], deckPos=0;
+function buildDeck(){
+  const pool=activeEntries();
+  // weak-first ordering: sort by mastery asc, then shuffle within
+  deck = shuffle(pool).sort((a,b)=>mastery(state.script,a.id)-mastery(state.script,b.id));
+  deckPos=0;
+}
+function renderCard(){
+  if(!deck.length){ cardStage.innerHTML=emptyStudy(); cardsCount.textContent=''; return; }
+  if(deckPos>=deck.length) buildDeck();
+  const e=deck[deckPos]; const ch=state.script==='h'?e.h:e.k;
+  cardsCount.textContent=`Card ${deckPos+1} of ${deck.length} · weak ones first`;
+  cardStage.innerHTML=`
+    <div class="flip" id="flip" tabindex="0" role="button" aria-label="Flashcard, tap to flip">
+      <div class="flip-inner">
+        <div class="face front"><span class="tag">${state.script==='h'?'hiragana':'katakana'}</span><span class="glyph">${ch}</span><span class="hint">tap to reveal</span></div>
+        <div class="face back"><span class="tag">romaji</span><span class="glyph">${e.r}</span><span class="hint">${e.accept.filter(a=>a!==e.r).join(' · ')||'\u00A0'}</span></div>
+      </div>
+    </div>
+    <span class="flip-tip">Did you recall it?</span>
+    <div class="card-actions">
+      <button class="btn again" id="cAgain">Review again</button>
+      <button class="btn good" id="cGood">Got it →</button>
+    </div>`;
+  const flip=document.getElementById('flip');
+  const doFlip=()=>flip.classList.toggle('flipped');
+  flip.addEventListener('click',doFlip);
+  flip.addEventListener('keydown',ev=>{ if(ev.key===' '||ev.key==='Enter'){ev.preventDefault();doFlip();} });
+  document.getElementById('cGood').onclick=()=>{ record(state.script,e.id,true); next(); };
+  document.getElementById('cAgain').onclick=()=>{ record(state.script,e.id,false); next(); };
+  function next(){ deckPos++; renderCard(); renderStats(); }
+}
+
+/* =========================================================
+   QUIZ — multiple choice, alternates direction
+   ========================================================= */
+const quizStage=document.getElementById('quizStage'), quizBar=document.getElementById('quizBar'), quizScore=document.getElementById('quizScore');
+let quiz={right:0,total:0,cur:null,dir:'k2r',answered:false};
+function newQuiz(){
+  const pool=activeEntries();
+  if(pool.length<4){ quizStage.innerHTML=emptyStudy(pool.length?'Need at least 4 characters — add another set.':null); quizScore.textContent=''; quizBar.style.width='0'; return; }
+  quiz.cur=weightedPick(pool);
+  quiz.dir = Math.random()<0.5?'k2r':'r2k';
+  quiz.answered=false;
+  const e=quiz.cur, ch=state.script==='h'?e.h:e.k;
+  // distractors
+  const others=shuffle(pool.filter(x=>x.id!==e.id)).slice(0,3);
+  const opts=shuffle([e,...others]);
+  let html;
+  if(quiz.dir==='k2r'){
+    html=`<div class="prompt"><div class="label">${state.script==='h'?'hiragana':'katakana'} → romaji</div><div class="q">${ch}</div></div>
+      <div class="choices">${opts.map(o=>`<button class="choice roman" data-id="${o.id}">${o.r}</button>`).join('')}</div>`;
+  } else {
+    html=`<div class="prompt"><div class="label">romaji → ${state.script==='h'?'hiragana':'katakana'}</div><div class="q roman">${e.r}</div></div>
+      <div class="choices">${opts.map(o=>`<button class="choice" data-id="${o.id}">${state.script==='h'?o.h:o.k}</button>`).join('')}</div>`;
+  }
+  quizStage.innerHTML=html;
+  quizStage.querySelectorAll('.choice').forEach(b=>b.addEventListener('click',()=>answerQuiz(b)));
+  quizBar.style.width = quiz.total? Math.min(100,(quiz.total%10)*10)+'%':'0';
+  renderQuizScore();
+}
+function answerQuiz(btn){
+  if(quiz.answered) return; quiz.answered=true;
+  const chosen=btn.dataset.id, correct=quiz.cur.id;
+  const ok = chosen===correct;
+  quiz.total++; if(ok) quiz.right++;
+  record(state.script,correct,ok);
+  quizStage.querySelectorAll('.choice').forEach(b=>{
+    b.disabled=true;
+    if(b.dataset.id===correct) b.classList.add('correct');
+    else if(b===btn) b.classList.add('wrong');
+  });
+  renderStats(); renderQuizScore();
+  setTimeout(newQuiz, ok?650:1150);
+}
+function renderQuizScore(){
+  quizScore.innerHTML = quiz.total? `<span><b>${quiz.right}</b>/${quiz.total} correct</span><span><b>${Math.round(quiz.right/quiz.total*100)}</b>% accuracy</span>`:'';
+}
+
+/* =========================================================
+   RECALL — type the romaji
+   ========================================================= */
+const recallStage=document.getElementById('recallStage'), recallScore=document.getElementById('recallScore');
+let recall={right:0,total:0,cur:null};
+function newRecall(){
+  const pool=activeEntries();
+  if(!pool.length){ recallStage.innerHTML=emptyStudy(); recallScore.textContent=''; return; }
+  recall.cur=weightedPick(pool);
+  const e=recall.cur, ch=state.script==='h'?e.h:e.k;
+  recallStage.innerHTML=`
+    <div class="glyph">${ch}</div>
+    <div class="sub">${state.script==='h'?'hiragana':'katakana'} — type the romaji</div>
+    <input class="rinput" id="rIn" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Type romaji">
+    <div class="reveal" id="rReveal">&nbsp;</div>
+    <button class="btn primary" id="rCheck">Check (Enter)</button>`;
+  const inp=document.getElementById('rIn'); inp.focus();
+  const submit=()=>checkRecall(inp);
+  inp.addEventListener('keydown',ev=>{ if(ev.key==='Enter') submit(); });
+  document.getElementById('rCheck').onclick=submit;
+  renderRecallScore();
+}
+function checkRecall(inp){
+  if(inp.disabled) return;
+  const val=inp.value.trim().toLowerCase();
+  if(!val) return;
+  const e=recall.cur;
+  const ok=e.accept.includes(val);
+  recall.total++; if(ok) recall.right++;
+  record(state.script,e.id,ok);
+  inp.disabled=true; inp.classList.add(ok?'ok':'no');
+  const rev=document.getElementById('rReveal');
+  rev.innerHTML = ok? `✓ <b>${e.r}</b>` : `✗ it was <b>${e.r}</b>`;
+  document.getElementById('rCheck').textContent='Next →';
+  document.getElementById('rCheck').onclick=newRecall;
+  renderStats(); renderRecallScore();
+  // allow Enter to advance
+  document.addEventListener('keydown',function adv(ev){ if(ev.key==='Enter'){ document.removeEventListener('keydown',adv); newRecall(); } });
+}
+function renderRecallScore(){
+  recallScore.innerHTML = recall.total? `<span><b>${recall.right}</b>/${recall.total} correct</span><span><b>${Math.round(recall.right/recall.total*100)}</b>% accuracy</span>`:'';
+}
+
+function emptyStudy(msg){
+  return `<div class="empty-msg"><div class="big">空</div>${msg||'Pick at least one set above to start.'}</div>`;
+}
+
+/* =========================================================
+   STATS STRIP
+   ========================================================= */
+function renderStats(){
+  const pool=activeEntries();
+  const total=pool.length;
+  let learned=0, masteredCount=0, seenSum=0, correctSum=0;
+  pool.forEach(e=>{
+    const m=mastery(state.script,e.id); const p=getP(state.script,e.id);
+    if(m>=1) learned++; if(m>=5) masteredCount++;
+    seenSum+=p.seen; correctSum+=p.correct;
+  });
+  const pct = total? Math.round(masteredCount/total*100):0;
+  const accuracy = seenSum? Math.round(correctSum/seenSum*100):'—';
+  document.getElementById('stats').innerHTML=`
+    <div class="stat"><div class="n">${masteredCount}<span class="unit">/${total}</span></div><div class="l">Mastered</div></div>
+    <div class="stat"><div class="n">${pct}<span class="unit">%</span></div><div class="l">Chart inked</div></div>
+    <div class="stat"><div class="n">${learned}</div><div class="l">Started</div></div>
+    <div class="stat"><div class="n">${accuracy}${accuracy==='—'?'':'<span class="unit">%</span>'}</div><div class="l">Accuracy</div></div>`;
+}
+
+/* =========================================================
+   MODE SWITCH + CONTROLS
+   ========================================================= */
+function setMode(mode){
+  state.mode=mode;
+  document.querySelectorAll('nav.tabs button').forEach(b=>b.classList.toggle('on',b.dataset.mode===mode));
+  document.querySelectorAll('.pane').forEach(p=>p.classList.remove('on'));
+  document.getElementById('pane-'+mode).classList.add('on');
+  if(mode==='chart') renderChart();
+  if(mode==='cards'){ buildDeck(); renderCard(); }
+  if(mode==='quiz'){ quiz={right:0,total:0,cur:null,dir:'k2r',answered:false}; newQuiz(); }
+  if(mode==='recall'){ recall={right:0,total:0,cur:null}; newRecall(); }
+  renderStats();
+}
+document.querySelectorAll('nav.tabs button').forEach(b=>b.addEventListener('click',()=>setMode(b.dataset.mode)));
+
+document.querySelectorAll('.seg [data-script]').forEach(b=>{
+  b.addEventListener('click',()=>{
+    state.script=b.dataset.script; Store.set('sumi_script',state.script);
+    document.querySelectorAll('.seg [data-script]').forEach(x=>x.classList.toggle('on',x===b));
+    refreshMode();
+  });
+});
+document.querySelector(`.seg [data-script="${state.script}"]`).classList.add('on');
+document.querySelector(`.seg [data-script="${state.script==='h'?'k':'h'}"]`).classList.remove('on');
+
+function bindSet(boxId,key){
+  const box=document.getElementById(boxId);
+  box.checked=state.sets[key];
+  box.addEventListener('change',()=>{
+    state.sets[key]=box.checked; Store.set('sumi_sets',state.sets); refreshMode();
+  });
+}
+bindSet('setBasic','basic'); bindSet('setDaku','daku'); bindSet('setCombo','combo');
+
+function refreshMode(){ setMode(state.mode); }
+
+// night mode
+const root=document.documentElement;
+function applyNight(){ root.classList.toggle('night',state.night); document.getElementById('nightLbl').textContent=state.night?'Day':'Night'; document.getElementById('nightBtn').firstChild.textContent=state.night?'☀️ ':'🌙 '; }
+document.getElementById('nightBtn').addEventListener('click',()=>{ state.night=!state.night; Store.set('sumi_night',state.night); applyNight(); });
+applyNight();
+
+// reset
+document.getElementById('resetBtn').addEventListener('click',()=>{
+  if(confirm('Reset all progress? This clears mastery for every character.')){
+    progress={}; Store.set(PKEY,progress); refreshMode();
+  }
+});
+
+// keyboard: Esc closes drawer
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeDrawer(); });
+
+// init
+renderStats();
+renderChart();
+if(!Store.persistent){
+  // gentle, non-blocking note in footer if storage unavailable
+  const f=document.querySelector('footer span');
+  f.textContent='Heads up: storage is blocked here, so progress won’t persist. It will once deployed.';
+}
+</script>
+</body>
+</html>
