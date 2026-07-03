@@ -310,6 +310,83 @@
   .mini-btn:focus-visible{outline:2px solid var(--shu);outline-offset:2px}
   .attrib{font-size:11px;color:var(--sumi-soft);flex-basis:100%}
   .attrib a{color:var(--shu)}
+
+  /* ---- learn path ---- */
+  nav.tabs{flex-wrap:wrap}
+  .unitcard{display:flex;align-items:center;gap:14px;border:1px solid var(--paper-line);background:var(--paper-2);border-radius:7px;padding:14px 16px;margin-bottom:11px;position:relative}
+  .unitcard.locked{opacity:.5}
+  .unitcard.full{border-color:rgba(var(--ink),.55)}
+  .unitcard.review{border-color:var(--shu)}
+  .unitcard.review.zzz{border-color:var(--paper-line);opacity:.75}
+  .useal{flex:none;width:42px;height:42px;border-radius:6px;background:var(--shu);color:#F6EFE2;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-weight:700;font-size:17px}
+  .unitcard.full .useal{background:var(--sumi)}
+  .unitcard.locked .useal{background:var(--sumi-soft)}
+  .umain{flex:1;min-width:0}
+  .utitle{font-weight:700;font-size:15.5px}
+  .utitle .ujp{font-family:var(--serif);font-weight:500;color:var(--sumi-soft);font-size:13px;margin-left:7px}
+  .usub{font-size:12.5px;color:var(--sumi-soft);margin-top:3px}
+  .udots{display:flex;gap:8px;margin-top:9px}
+  .ldot{width:34px;height:34px;border-radius:50%;border:1.5px solid var(--sumi-soft);background:var(--paper);color:var(--sumi);font-family:var(--sans);font-size:13.5px;font-weight:700;cursor:pointer;transition:.13s}
+  .ldot:hover:not([disabled]){border-color:var(--shu);color:var(--shu);transform:translateY(-1px)}
+  .ldot.done{background:rgba(var(--ink),.85);border-color:transparent;color:#F6EFE2}
+  .ldot[disabled]{opacity:.35;cursor:default}
+  .ldot:focus-visible{outline:2px solid var(--shu);outline-offset:2px}
+  .tipbtn{flex:none;width:30px;height:30px;border-radius:50%;border:1px solid var(--paper-line);background:var(--paper);color:var(--sumi-soft);font-weight:700;cursor:pointer;transition:.13s}
+  .tipbtn:hover{border-color:var(--shu);color:var(--shu)}
+  .lock{position:absolute;right:16px;top:12px;font-size:13px}
+  .ubtn{flex:none}
+  .path-end{text-align:center;font-size:13px;color:var(--sumi-soft);padding:18px 0 6px;font-style:italic}
+  /* ---- lesson ---- */
+  .lsn-top{display:flex;align-items:center;gap:12px;margin-bottom:22px}
+  .lsn-x{flex:none;width:34px;height:34px;border:none;background:none;color:var(--sumi-soft);font-size:26px;line-height:1;cursor:pointer}
+  .lsn-x:hover{color:var(--shu)}
+  .lsn-pbar{flex:1;margin:0}
+  .lsn-label{font-size:12px;letter-spacing:1.6px;text-transform:uppercase;color:var(--sumi-soft);margin-bottom:14px}
+  .lsn-q{font-size:22px;font-weight:700;margin-bottom:6px}
+  .lsn-q.jpq{font-family:var(--serif);font-weight:500;font-size:30px}
+  .lsn-q.enq{font-size:21px}
+  .lsn-q.sent{line-height:1.5}
+  .lsn-ro{font-size:13px;color:var(--sumi-soft);margin-bottom:14px}
+  .lsn-choices{margin-top:16px}
+  .choice.picked{border-color:var(--shu);box-shadow:0 0 0 1px var(--shu) inset}
+  .spk{border:none;background:none;font-size:18px;cursor:pointer;vertical-align:middle}
+  .listenq{display:flex;gap:12px;margin:8px 0 4px}
+  .bigspk{width:74px;height:74px;border-radius:12px;border:1px solid var(--paper-line);background:var(--paper-2);font-size:30px;cursor:pointer;transition:.13s}
+  .bigspk:hover{border-color:var(--shu)}
+  .bigspk.slow{width:56px;height:56px;align-self:flex-end;font-size:22px}
+  .built{min-height:56px;border-bottom:1.5px solid var(--paper-line);display:flex;flex-wrap:wrap;gap:8px;align-content:flex-start;padding:6px 2px;margin:14px 0 16px}
+  .bank{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{border:1px solid var(--paper-line);background:var(--paper-2);border-radius:6px;padding:9px 14px;font-family:var(--serif);font-size:18px;color:var(--sumi);cursor:pointer;transition:.12s;box-shadow:0 1.5px 0 var(--paper-line)}
+  .chip.roman{font-family:var(--sans);font-size:15px}
+  .chip:hover{border-color:var(--sumi-soft)}
+  .chip.used{opacity:.25;pointer-events:none}
+  .chip.built-chip{background:var(--paper)}
+  .chip:focus-visible{outline:2px solid var(--shu);outline-offset:2px}
+  .mgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+  .mcol{display:flex;flex-direction:column;gap:10px}
+  .mopt{border:1px solid var(--paper-line);background:var(--paper-2);border-radius:6px;padding:13px 10px;cursor:pointer;transition:.12s;font-size:15px}
+  .mopt.jp{font-family:var(--serif);font-size:19px}
+  .mopt.picked{border-color:var(--shu);box-shadow:0 0 0 1px var(--shu) inset}
+  .mopt.done{opacity:.3;pointer-events:none}
+  .mopt.shake{animation:shake .3s ease}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+  .lsn-foot{margin-top:26px}
+  .btn.wide{width:100%;padding:14px;font-size:16px}
+  .fbanner{margin-top:18px;border-radius:7px;padding:14px 16px;animation:fade .25s ease}
+  .fbanner.good{background:rgba(46,110,74,.13);border:1px solid rgba(46,110,74,.4)}
+  .fbanner.bad{background:rgba(178,58,44,.11);border:1px solid rgba(178,58,44,.4)}
+  .fb-head{font-weight:700;font-size:14.5px}
+  .fb-ans{margin-top:6px;font-family:var(--serif);font-size:17px}
+  .tipcard{background:var(--paper-2);border:1px solid var(--paper-line);border-radius:7px;padding:18px 18px;font-size:15px;line-height:1.75}
+  .tipjp{font-family:var(--serif);font-size:30px;margin-bottom:10px;color:var(--shu)}
+  .lsn-end{text-align:center;padding:34px 0}
+  .end-seal{width:86px;height:86px;border-radius:10px;background:var(--shu);color:#F6EFE2;font-family:var(--serif);font-size:30px;font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;transform:rotate(-3deg)}
+  .end-title{font-size:21px;font-weight:800;margin-bottom:18px}
+  .end-stats{display:flex;justify-content:center;gap:30px;margin-bottom:16px}
+  .estat b{display:block;font-size:22px}
+  .estat span{font-size:11.5px;letter-spacing:1px;text-transform:uppercase;color:var(--sumi-soft)}
+  .end-note{font-size:13.5px;color:var(--sumi-soft);margin-bottom:8px;font-style:italic}
+  .lsn-end .btn{max-width:340px;margin:14px auto 0}
 </style>
 </head>
 <body>
@@ -340,7 +417,8 @@
 
   <!-- Tabs -->
   <nav class="tabs" role="tablist">
-    <button data-mode="chart" class="on" role="tab">Chart<span class="jp">表</span></button>
+    <button data-mode="learn" class="on" role="tab">Learn<span class="jp">道</span></button>
+    <button data-mode="chart" role="tab">Chart<span class="jp">表</span></button>
     <button data-mode="cards" role="tab">Cards<span class="jp">札</span></button>
     <button data-mode="quiz" role="tab">Quiz<span class="jp">試</span></button>
     <button data-mode="recall" role="tab">Recall<span class="jp">書</span></button>
@@ -351,8 +429,14 @@
   <!-- Stats -->
   <div class="stats" id="stats"></div>
 
+  <!-- LEARN -->
+  <section class="pane on" id="pane-learn">
+    <div id="learnPath"></div>
+    <div id="learnStage" style="display:none"></div>
+  </section>
+
   <!-- CHART -->
-  <section class="pane on" id="pane-chart">
+  <section class="pane" id="pane-chart">
     <div id="chartArea"></div>
   </section>
 
@@ -834,6 +918,7 @@ function emptyStudy(msg){
    ========================================================= */
 function currentDomain(){ return state.mode==='kanji'?'kanji':(state.mode==='vocab'?'vocab':'kana'); }
 function renderStats(){
+  if(state.mode==='learn'){ renderLearnStats(); return; }
   const dom=currentDomain();
   let pool,ns,keyFn,inkLabel;
   if(dom==='kanji'){ pool=KANJI; ns='kanji'; keyFn=e=>e.c; inkLabel='Grid inked'; }
@@ -871,6 +956,7 @@ function setMode(mode){
   else if(mode==='recall'){ recall={right:0,total:0,cur:null}; newRecall(); }
   else if(mode==='kanji') showKanjiSub(state.kanjiSub);
   else if(mode==='vocab') showVocabSub(state.vocabSub);
+  else if(mode==='learn') renderLearnHome();
   renderStats();
 }
 document.querySelectorAll('nav.tabs button').forEach(b=>b.addEventListener('click',()=>setMode(b.dataset.mode)));
@@ -905,7 +991,7 @@ applyNight();
 // reset
 document.getElementById('resetBtn').addEventListener('click',()=>{
   if(confirm('Reset all progress? This clears mastery for every character.')){
-    progress={}; Store.set(PKEY,progress); refreshMode();
+    progress={}; Store.set(PKEY,progress); LSTATE={done:{},xp:0,days:{},srs:{}}; saveL(); refreshMode();
   }
 });
 
@@ -1225,9 +1311,357 @@ function showVocabSub(sub){
 document.querySelectorAll('#kanjiSub button').forEach(b=>b.addEventListener('click',()=>showKanjiSub(b.dataset.sub)));
 document.querySelectorAll('#vocabSub button').forEach(b=>b.addEventListener('click',()=>showVocabSub(b.dataset.sub)));
 
+const COURSE=[{"id":"u1","title":"Greetings","jp":"あいさつ","tip":"These are <b>set phrases</b> — no grammar needed, just use them whole. こんにちは and こんばんは end in は but it's read <b>wa</b> (a leftover of old grammar).","vocab":[{"jp":"こんにちは","ro":"konnichiwa","en":"hello","i":"u1:v1"},{"jp":"おはようございます","ro":"ohayō gozaimasu","en":"good morning","i":"u1:v2"},{"jp":"こんばんは","ro":"konbanwa","en":"good evening","i":"u1:v3"},{"jp":"さようなら","ro":"sayōnara","en":"goodbye","i":"u1:v4"},{"jp":"ありがとうございます","ro":"arigatō gozaimasu","en":"thank you","i":"u1:v5"},{"jp":"すみません","ro":"sumimasen","en":"excuse me / sorry","i":"u1:v6"},{"jp":"はい","ro":"hai","en":"yes","i":"u1:v7"},{"jp":"いいえ","ro":"iie","en":"no","i":"u1:v8"},{"jp":"おやすみなさい","ro":"oyasuminasai","en":"good night","i":"u1:v9"}],"sents":[{"t":["こんにちは"],"en":"Hello.","i":"u1:s1","ro":"konnichiwa"},{"t":["おはようございます"],"en":"Good morning.","i":"u1:s2","ro":"ohayōgozaimasu"},{"t":["ありがとうございます"],"en":"Thank you very much.","i":"u1:s3","ro":"arigatōgozaimasu"},{"t":["すみません"],"en":"Excuse me.","i":"u1:s4","ro":"sumimasen"},{"t":["はい","そうです"],"en":"Yes, that's right.","i":"u1:s5","ro":"hai sōdesu"},{"t":["いいえ","ちがいます"],"en":"No, that's not right.","i":"u1:s6","ro":"iie chigaimasu"},{"t":["さようなら","また","あした"],"en":"Goodbye, see you tomorrow.","i":"u1:s7","ro":"sayōnara mata ashita"},{"t":["おやすみなさい"],"en":"Good night.","i":"u1:s8","ro":"oyasuminasai"}]},{"id":"u2","title":"About you","jp":"じこしょうかい","tip":"<b>Xは Yです</b> = “X is Y.” Think of <b>は</b> (read <b>wa</b>) as a spotlight: “as for X…”. <b>です</b> is the polite “is/am/are.” <b>の</b> works like ’s: わたし<b>の</b>なまえ = my name. Add <b>か</b> at the end to turn any sentence into a question — a spoken question mark.","vocab":[{"jp":"わたし","ro":"watashi","en":"I, me","i":"u2:v1"},{"jp":"なまえ","ro":"namae","en":"name","i":"u2:v2"},{"jp":"がくせい","ro":"gakusei","en":"student","i":"u2:v3"},{"jp":"せんせい","ro":"sensei","en":"teacher","i":"u2:v4"},{"jp":"ともだち","ro":"tomodachi","en":"friend","i":"u2:v5"},{"jp":"にほんじん","ro":"nihonjin","en":"Japanese person","i":"u2:v6"},{"jp":"はじめまして","ro":"hajimemashite","en":"nice to meet you","i":"u2:v7"},{"jp":"よろしくおねがいします","ro":"yoroshiku onegaishimasu","en":"please be kind to me","i":"u2:v8"}],"sents":[{"t":["わたし","は","がくせい","です"],"en":"I am a student.","i":"u2:s1","ro":"watashi wa gakusei desu"},{"t":["わたし","の","なまえ","は","マリア","です"],"en":"My name is Maria.","i":"u2:s2","ro":"watashi no namae wa maria desu"},{"t":["たなかさん","は","せんせい","です"],"en":"Mr. Tanaka is a teacher.","i":"u2:s3","ro":"tanakasan wa sensei desu"},{"t":["はじめまして"],"en":"Nice to meet you.","i":"u2:s4","ro":"hajimemashite"},{"t":["よろしく","おねがいします"],"en":"Please be kind to me.","i":"u2:s5","ro":"yoroshiku onegaishimasu"},{"t":["あなた","は","がくせい","です","か"],"en":"Are you a student?","i":"u2:s6","ro":"anata wa gakusei desu ka"},{"t":["わたし","は","にほんじん","です"],"en":"I am Japanese.","i":"u2:s7","ro":"watashi wa nihonjin desu"},{"t":["わたし","は","シンガポールじん","です"],"en":"I am Singaporean.","i":"u2:s8","ro":"watashi wa shingapōrujin desu"}]},{"id":"u3","title":"This & that","jp":"これ・それ・あれ","tip":"Three zones: <b>これ</b> = near me, <b>それ</b> = near you, <b>あれ</b> = far from both. <b>なん</b> = what. これは なんですか = “What is this?”","vocab":[{"jp":"これ","ro":"kore","en":"this","i":"u3:v1"},{"jp":"それ","ro":"sore","en":"that (near you)","i":"u3:v2"},{"jp":"あれ","ro":"are","en":"that (over there)","i":"u3:v3"},{"jp":"なん","ro":"nan","en":"what","i":"u3:v4"},{"jp":"ほん","ro":"hon","en":"book","i":"u3:v5"},{"jp":"かばん","ro":"kaban","en":"bag","i":"u3:v6"},{"jp":"ペン","ro":"pen","en":"pen","i":"u3:v7"},{"jp":"でんわ","ro":"denwa","en":"phone","i":"u3:v8"},{"jp":"がっこう","ro":"gakkō","en":"school","i":"u3:v9"}],"sents":[{"t":["これ","は","なん","です","か"],"en":"What is this?","i":"u3:s1","ro":"kore wa nan desu ka"},{"t":["それ","は","ほん","です"],"en":"That is a book.","i":"u3:s2","ro":"sore wa hon desu"},{"t":["あれ","は","がっこう","です"],"en":"That over there is a school.","i":"u3:s3","ro":"are wa gakkō desu"},{"t":["これ","は","わたし","の","かばん","です"],"en":"This is my bag.","i":"u3:s4","ro":"kore wa watashi no kaban desu"},{"t":["それ","は","ペン","です","か"],"en":"Is that a pen?","i":"u3:s5","ro":"sore wa pen desu ka"},{"t":["はい","これ","は","でんわ","です"],"en":"Yes, this is a phone.","i":"u3:s6","ro":"hai kore wa denwa desu"},{"t":["あれ","は","なん","です","か"],"en":"What is that over there?","i":"u3:s7","ro":"are wa nan desu ka"}]},{"id":"u4","title":"Food & drink","jp":"たべもの","tip":"<b>を</b> (read <b>o</b>) marks the thing the verb acts on — an arrow pointing at the object: パン<b>を</b>たべます = bread ←eat. Polite verbs end in <b>ます</b>, used for both “I eat” and “I will eat.”","vocab":[{"jp":"たべます","ro":"tabemasu","en":"to eat","i":"u4:v1"},{"jp":"のみます","ro":"nomimasu","en":"to drink","i":"u4:v2"},{"jp":"ごはん","ro":"gohan","en":"rice, meal","i":"u4:v3"},{"jp":"パン","ro":"pan","en":"bread","i":"u4:v4"},{"jp":"みず","ro":"mizu","en":"water","i":"u4:v5"},{"jp":"おちゃ","ro":"ocha","en":"tea","i":"u4:v6"},{"jp":"コーヒー","ro":"kōhī","en":"coffee","i":"u4:v7"},{"jp":"すし","ro":"sushi","en":"sushi","i":"u4:v8"},{"jp":"りんご","ro":"ringo","en":"apple","i":"u4:v9"}],"sents":[{"t":["わたし","は","パン","を","たべます"],"en":"I eat bread.","i":"u4:s1","ro":"watashi wa pan o tabemasu"},{"t":["おちゃ","を","のみます"],"en":"I drink tea.","i":"u4:s2","ro":"ocha o nomimasu"},{"t":["すし","を","たべます","か"],"en":"Do you eat sushi?","i":"u4:s3","ro":"sushi o tabemasu ka"},{"t":["わたし","は","みず","を","のみます"],"en":"I drink water.","i":"u4:s4","ro":"watashi wa mizu o nomimasu"},{"t":["ごはん","を","たべます"],"en":"I eat rice.","i":"u4:s5","ro":"gohan o tabemasu"},{"t":["コーヒー","を","のみます","か"],"en":"Do you drink coffee?","i":"u4:s6","ro":"kōhī o nomimasu ka"},{"t":["りんご","を","たべます"],"en":"I eat an apple.","i":"u4:s7","ro":"ringo o tabemasu"}]},{"id":"u5","title":"Numbers & age","jp":"すうじ","tip":"Count: いち に さん よん ご ろく なな はち きゅう じゅう. <b>〜さい</b> = years old; ask with なんさいですか. Note: 20 is traditionally <b>はたち</b>, but にじゅっさい is also heard.","vocab":[{"jp":"いち","ro":"ichi","en":"one","i":"u5:v1"},{"jp":"に","ro":"ni","en":"two","i":"u5:v2"},{"jp":"さん","ro":"san","en":"three","i":"u5:v3"},{"jp":"よん","ro":"yon","en":"four","i":"u5:v4"},{"jp":"ご","ro":"go","en":"five","i":"u5:v5"},{"jp":"ろく","ro":"roku","en":"six","i":"u5:v6"},{"jp":"なな","ro":"nana","en":"seven","i":"u5:v7"},{"jp":"はち","ro":"hachi","en":"eight","i":"u5:v8"},{"jp":"きゅう","ro":"kyū","en":"nine","i":"u5:v9"},{"jp":"じゅう","ro":"jū","en":"ten","i":"u5:v10"},{"jp":"なんさい","ro":"nansai","en":"how old","i":"u5:v11"}],"sents":[{"t":["なんさい","です","か"],"en":"How old are you?","i":"u5:s1","ro":"nansai desu ka"},{"t":["わたし","は","じゅうはっさい","です"],"en":"I am eighteen years old.","i":"u5:s2","ro":"watashi wa jūhassai desu"},{"t":["いち","に","さん"],"en":"One, two, three.","i":"u5:s3","ro":"ichi ni san"},{"t":["せんせい","は","さんじゅっさい","です"],"en":"The teacher is thirty years old.","i":"u5:s4","ro":"sensei wa sanjussai desu"},{"t":["よん","ご","ろく"],"en":"Four, five, six.","i":"u5:s5","ro":"yon go roku"},{"t":["わたし","は","にじゅっさい","です"],"en":"I am twenty years old.","i":"u5:s6","ro":"watashi wa nijussai desu"},{"t":["なな","はち","きゅう","じゅう"],"en":"Seven, eight, nine, ten.","i":"u5:s7","ro":"nana hachi kyū jū"}]},{"id":"u6","title":"Not doing","jp":"ひてい","tip":"Flip ます → <b>ません</b> to say “don’t”: のみます → のみません. For nouns, “is not” = <b>じゃないです</b>: せんせいじゃないです = I’m not a teacher. ぜんぜん + negative = “not at all.”","vocab":[{"jp":"わかります","ro":"wakarimasu","en":"to understand","i":"u6:v1"},{"jp":"わかりません","ro":"wakarimasen","en":"I don't understand","i":"u6:v2"},{"jp":"にく","ro":"niku","en":"meat","i":"u6:v3"},{"jp":"さかな","ro":"sakana","en":"fish","i":"u6:v4"},{"jp":"やさい","ro":"yasai","en":"vegetables","i":"u6:v5"},{"jp":"ぜんぜん","ro":"zenzen","en":"not at all","i":"u6:v6"},{"jp":"ちょっと","ro":"chotto","en":"a little","i":"u6:v7"}],"sents":[{"t":["わたし","は","コーヒー","を","のみません"],"en":"I do not drink coffee.","i":"u6:s1","ro":"watashi wa kōhī o nomimasen"},{"t":["にく","を","たべません"],"en":"I do not eat meat.","i":"u6:s2","ro":"niku o tabemasen"},{"t":["わかります","か"],"en":"Do you understand?","i":"u6:s3","ro":"wakarimasu ka"},{"t":["いいえ","わかりません"],"en":"No, I don't understand.","i":"u6:s4","ro":"iie wakarimasen"},{"t":["ぜんぜん","わかりません"],"en":"I don't understand at all.","i":"u6:s5","ro":"zenzen wakarimasen"},{"t":["わたし","は","せんせい","じゃないです"],"en":"I am not a teacher.","i":"u6:s6","ro":"watashi wa sensei janaidesu"},{"t":["それ","は","さかな","じゃないです"],"en":"That is not fish.","i":"u6:s7","ro":"sore wa sakana janaidesu"},{"t":["ちょっと","わかります"],"en":"I understand a little.","i":"u6:s8","ro":"chotto wakarimasu"}]},{"id":"u7","title":"Going places","jp":"いきます","tip":"<b>に</b> or <b>へ</b> (read <b>e</b>) marks the destination — the arrow’s target: がっこう<b>に</b>いきます. <b>で</b> marks the vehicle or tool: でんしゃ<b>で</b> = by train.","vocab":[{"jp":"いきます","ro":"ikimasu","en":"to go","i":"u7:v1"},{"jp":"きます","ro":"kimasu","en":"to come","i":"u7:v2"},{"jp":"かえります","ro":"kaerimasu","en":"to return home","i":"u7:v3"},{"jp":"うち","ro":"uchi","en":"home, house","i":"u7:v4"},{"jp":"えき","ro":"eki","en":"station","i":"u7:v5"},{"jp":"とうきょう","ro":"Tōkyō","en":"Tokyo","i":"u7:v6"},{"jp":"にほん","ro":"Nihon","en":"Japan","i":"u7:v7"},{"jp":"バス","ro":"basu","en":"bus","i":"u7:v8"},{"jp":"でんしゃ","ro":"densha","en":"train","i":"u7:v9"}],"sents":[{"t":["がっこう","に","いきます"],"en":"I go to school.","i":"u7:s1","ro":"gakkō ni ikimasu"},{"t":["わたし","は","にほん","へ","いきます"],"en":"I go to Japan.","i":"u7:s2","ro":"watashi wa nihon e ikimasu"},{"t":["うち","に","かえります"],"en":"I return home.","i":"u7:s3","ro":"uchi ni kaerimasu"},{"t":["あした","とうきょう","に","いきます"],"en":"Tomorrow I will go to Tokyo.","i":"u7:s4","ro":"ashita tōkyō ni ikimasu"},{"t":["でんしゃ","で","いきます"],"en":"I go by train.","i":"u7:s5","ro":"densha de ikimasu"},{"t":["バス","で","えき","に","いきます"],"en":"I go to the station by bus.","i":"u7:s6","ro":"basu de eki ni ikimasu"},{"t":["ともだち","が","うち","に","きます"],"en":"A friend is coming to my house.","i":"u7:s7","ro":"tomodachi ga uchi ni kimasu"}]},{"id":"u8","title":"There is…","jp":"あります・います","tip":"Two “there is” verbs: <b>います</b> for living, moving things (people, animals); <b>あります</b> for everything else. <b>が</b> marks what exists; the place takes <b>に</b>. うえ = on top, なか = inside: つくえの うえに = on the desk.","vocab":[{"jp":"あります","ro":"arimasu","en":"there is (thing)","i":"u8:v1"},{"jp":"います","ro":"imasu","en":"there is (person/animal)","i":"u8:v2"},{"jp":"ねこ","ro":"neko","en":"cat","i":"u8:v3"},{"jp":"いぬ","ro":"inu","en":"dog","i":"u8:v4"},{"jp":"つくえ","ro":"tsukue","en":"desk","i":"u8:v5"},{"jp":"うえ","ro":"ue","en":"top, above","i":"u8:v6"},{"jp":"なか","ro":"naka","en":"inside","i":"u8:v7"},{"jp":"どこ","ro":"doko","en":"where","i":"u8:v8"},{"jp":"トイレ","ro":"toire","en":"toilet","i":"u8:v9"},{"jp":"ぎんこう","ro":"ginkō","en":"bank","i":"u8:v10"},{"jp":"あそこ","ro":"asoko","en":"over there","i":"u8:v11"}],"sents":[{"t":["ねこ","が","います"],"en":"There is a cat.","i":"u8:s1","ro":"neko ga imasu"},{"t":["つくえ","の","うえ","に","ほん","が","あります"],"en":"There is a book on the desk.","i":"u8:s2","ro":"tsukue no ue ni hon ga arimasu"},{"t":["トイレ","は","どこ","です","か"],"en":"Where is the toilet?","i":"u8:s3","ro":"toire wa doko desu ka"},{"t":["ぎんこう","は","あそこ","です"],"en":"The bank is over there.","i":"u8:s4","ro":"ginkō wa asoko desu"},{"t":["うち","に","いぬ","が","います"],"en":"There is a dog at my house.","i":"u8:s5","ro":"uchi ni inu ga imasu"},{"t":["かばん","の","なか","に","ペン","が","あります"],"en":"There is a pen inside the bag.","i":"u8:s6","ro":"kaban no naka ni pen ga arimasu"},{"t":["がっこう","に","せんせい","が","います"],"en":"There is a teacher at the school.","i":"u8:s7","ro":"gakkō ni sensei ga imasu"}]},{"id":"u9","title":"Describing","jp":"けいようし","tip":"i-adjectives end in <b>い</b> and slot straight in: before a noun (おおきい りんご) or before です. <b>この/その/あの</b> = this/that/that-over-there + noun (same three zones as これ/それ/あれ).","vocab":[{"jp":"おおきい","ro":"ōkii","en":"big","i":"u9:v1"},{"jp":"ちいさい","ro":"chiisai","en":"small","i":"u9:v2"},{"jp":"あたらしい","ro":"atarashii","en":"new","i":"u9:v3"},{"jp":"ふるい","ro":"furui","en":"old (things)","i":"u9:v4"},{"jp":"おいしい","ro":"oishii","en":"delicious","i":"u9:v5"},{"jp":"たかい","ro":"takai","en":"expensive, tall","i":"u9:v6"},{"jp":"むずかしい","ro":"muzukashii","en":"difficult","i":"u9:v7"},{"jp":"たのしい","ro":"tanoshii","en":"fun","i":"u9:v8"},{"jp":"にほんご","ro":"nihongo","en":"Japanese language","i":"u9:v9"}],"sents":[{"t":["この","りんご","は","おおきい","です"],"en":"This apple is big.","i":"u9:s1","ro":"kono ringo wa ōkii desu"},{"t":["その","かばん","は","あたらしい","です"],"en":"That bag is new.","i":"u9:s2","ro":"sono kaban wa atarashii desu"},{"t":["にほんご","は","むずかしい","です"],"en":"Japanese is difficult.","i":"u9:s3","ro":"nihongo wa muzukashii desu"},{"t":["この","すし","は","おいしい","です"],"en":"This sushi is delicious.","i":"u9:s4","ro":"kono sushi wa oishii desu"},{"t":["あの","でんわ","は","たかい","です"],"en":"That phone is expensive.","i":"u9:s5","ro":"ano denwa wa takai desu"},{"t":["わたし","の","うち","は","ちいさい","です"],"en":"My house is small.","i":"u9:s6","ro":"watashi no uchi wa chiisai desu"},{"t":["この","ほん","は","ふるい","です"],"en":"This book is old.","i":"u9:s7","ro":"kono hon wa furui desu"},{"t":["にほんご","は","たのしい","です"],"en":"Japanese is fun.","i":"u9:s8","ro":"nihongo wa tanoshii desu"}]},{"id":"u10","title":"Likes","jp":"すきです","tip":"Likes use <b>が</b>, not を: ねこ<b>が</b>すきです — literally “cats are liked (by me).” だいすき = love; きらい = dislike.","vocab":[{"jp":"すき","ro":"suki","en":"liked, like","i":"u10:v1"},{"jp":"だいすき","ro":"daisuki","en":"loved, love","i":"u10:v2"},{"jp":"きらい","ro":"kirai","en":"disliked, dislike","i":"u10:v3"},{"jp":"スポーツ","ro":"supōtsu","en":"sports","i":"u10:v4"},{"jp":"おんがく","ro":"ongaku","en":"music","i":"u10:v5"},{"jp":"えいが","ro":"eiga","en":"movie","i":"u10:v6"},{"jp":"アニメ","ro":"anime","en":"anime","i":"u10:v7"}],"sents":[{"t":["わたし","は","ねこ","が","すき","です"],"en":"I like cats.","i":"u10:s1","ro":"watashi wa neko ga suki desu"},{"t":["すし","が","だいすき","です"],"en":"I love sushi.","i":"u10:s2","ro":"sushi ga daisuki desu"},{"t":["スポーツ","が","すき","です","か"],"en":"Do you like sports?","i":"u10:s3","ro":"supōtsu ga suki desu ka"},{"t":["おんがく","が","すき","です"],"en":"I like music.","i":"u10:s4","ro":"ongaku ga suki desu"},{"t":["えいが","が","だいすき","です"],"en":"I love movies.","i":"u10:s5","ro":"eiga ga daisuki desu"},{"t":["わたし","は","にく","が","きらい","です"],"en":"I dislike meat.","i":"u10:s6","ro":"watashi wa niku ga kirai desu"},{"t":["アニメ","が","すき","です"],"en":"I like anime.","i":"u10:s7","ro":"anime ga suki desu"}]},{"id":"u11","title":"Time","jp":"じかん","tip":"Number + <b>じ</b> = o’clock (さんじ = 3:00). <b>はん</b> = half past. ごぜん = a.m., ごご = p.m. A time takes <b>に</b> for “at”: ろくじ<b>に</b>たべます. Watch out: 7 o’clock is <b>しちじ</b>.","vocab":[{"jp":"いま","ro":"ima","en":"now","i":"u11:v1"},{"jp":"なんじ","ro":"nanji","en":"what time","i":"u11:v2"},{"jp":"はん","ro":"han","en":"half past","i":"u11:v3"},{"jp":"ごぜん","ro":"gozen","en":"a.m.","i":"u11:v4"},{"jp":"ごご","ro":"gogo","en":"p.m.","i":"u11:v5"},{"jp":"あさ","ro":"asa","en":"morning","i":"u11:v6"},{"jp":"よる","ro":"yoru","en":"night","i":"u11:v7"}],"sents":[{"t":["いま","なんじ","です","か"],"en":"What time is it now?","i":"u11:s1","ro":"ima nanji desu ka"},{"t":["いま","さんじ","です"],"en":"It is three o'clock.","i":"u11:s2","ro":"ima sanji desu"},{"t":["くじはん","です"],"en":"It is half past nine.","i":"u11:s3","ro":"kujihan desu"},{"t":["ごぜん","しちじ","です"],"en":"It is 7 a.m.","i":"u11:s4","ro":"gozen shichiji desu"},{"t":["ごご","ろくじ","に","ごはん","を","たべます"],"en":"I eat a meal at 6 p.m.","i":"u11:s5","ro":"gogo rokuji ni gohan o tabemasu"},{"t":["あさ","コーヒー","を","のみます"],"en":"I drink coffee in the morning.","i":"u11:s6","ro":"asa kōhī o nomimasu"},{"t":["よる","おちゃ","を","のみます"],"en":"I drink tea at night.","i":"u11:s7","ro":"yoru ocha o nomimasu"}]},{"id":"u12","title":"Days of the week","jp":"ようび","tip":"Every day ends in <b>ようび</b>: げつ(Moon)・か(fire)・すい(water)・もく(wood)・きん(gold)・ど(earth)・にち(Sun) + ようび. Ask with なんようび. A day takes <b>に</b> for “on.”","vocab":[{"jp":"きょう","ro":"kyō","en":"today","i":"u12:v1"},{"jp":"あした","ro":"ashita","en":"tomorrow","i":"u12:v2"},{"jp":"きのう","ro":"kinō","en":"yesterday","i":"u12:v3"},{"jp":"げつようび","ro":"getsuyōbi","en":"Monday","i":"u12:v4"},{"jp":"かようび","ro":"kayōbi","en":"Tuesday","i":"u12:v5"},{"jp":"すいようび","ro":"suiyōbi","en":"Wednesday","i":"u12:v6"},{"jp":"もくようび","ro":"mokuyōbi","en":"Thursday","i":"u12:v7"},{"jp":"きんようび","ro":"kin'yōbi","en":"Friday","i":"u12:v8"},{"jp":"どようび","ro":"doyōbi","en":"Saturday","i":"u12:v9"},{"jp":"にちようび","ro":"nichiyōbi","en":"Sunday","i":"u12:v10"},{"jp":"やすみ","ro":"yasumi","en":"day off","i":"u12:v11"},{"jp":"みます","ro":"mimasu","en":"to see, watch","i":"u12:v12"}],"sents":[{"t":["きょう","は","げつようび","です"],"en":"Today is Monday.","i":"u12:s1","ro":"kyō wa getsuyōbi desu"},{"t":["あした","は","かようび","です"],"en":"Tomorrow is Tuesday.","i":"u12:s2","ro":"ashita wa kayōbi desu"},{"t":["きょう","は","なんようび","です","か"],"en":"What day is it today?","i":"u12:s3","ro":"kyō wa nan'yōbi desu ka"},{"t":["どようび","に","がっこう","に","いきません"],"en":"I do not go to school on Saturday.","i":"u12:s4","ro":"doyōbi ni gakkō ni ikimasen"},{"t":["にちようび","は","やすみ","です"],"en":"Sunday is a day off.","i":"u12:s5","ro":"nichiyōbi wa yasumi desu"},{"t":["きんようび","に","えいが","を","みます"],"en":"I watch a movie on Friday.","i":"u12:s6","ro":"kin'yōbi ni eiga o mimasu"},{"t":["あした","は","もくようび","です"],"en":"Tomorrow is Thursday.","i":"u12:s7","ro":"ashita wa mokuyōbi desu"}]},{"id":"u13","title":"Past tense","jp":"かこ","tip":"Polite past: ます → <b>ました</b> (ate = たべました), didn’t = <b>ませんでした</b>. For nouns, was = <b>でした</b>. Bonus: <b>で</b> also marks where an action happens: レストラン<b>で</b>たべました.","vocab":[{"jp":"せんしゅう","ro":"senshū","en":"last week","i":"u13:v1"},{"jp":"きょねん","ro":"kyonen","en":"last year","i":"u13:v2"},{"jp":"けさ","ro":"kesa","en":"this morning","i":"u13:v3"},{"jp":"レストラン","ro":"resutoran","en":"restaurant","i":"u13:v4"},{"jp":"パーティー","ro":"pātī","en":"party","i":"u13:v5"},{"jp":"しごと","ro":"shigoto","en":"work, job","i":"u13:v6"},{"jp":"しゅくだい","ro":"shukudai","en":"homework","i":"u13:v7"}],"sents":[{"t":["きのう","すし","を","たべました"],"en":"Yesterday I ate sushi.","i":"u13:s1","ro":"kinō sushi o tabemashita"},{"t":["せんしゅう","とうきょう","に","いきました"],"en":"Last week I went to Tokyo.","i":"u13:s2","ro":"senshū tōkyō ni ikimashita"},{"t":["けさ","コーヒー","を","のみませんでした"],"en":"This morning I did not drink coffee.","i":"u13:s3","ro":"kesa kōhī o nomimasendeshita"},{"t":["きのう","は","やすみ","でした"],"en":"Yesterday was a day off.","i":"u13:s4","ro":"kinō wa yasumi deshita"},{"t":["きょねん","がくせい","でした"],"en":"Last year I was a student.","i":"u13:s5","ro":"kyonen gakusei deshita"},{"t":["しごと","に","いきました"],"en":"I went to work.","i":"u13:s6","ro":"shigoto ni ikimashita"},{"t":["レストラン","で","ごはん","を","たべました"],"en":"I ate a meal at a restaurant.","i":"u13:s7","ro":"resutoran de gohan o tabemashita"}]},{"id":"u14","title":"Family","jp":"かぞく","tip":"These are the humble words for <b>your own</b> family: ちち = my father, はは = my mother. (Other people’s parents get politer words — later.) ひとり = one person.","vocab":[{"jp":"かぞく","ro":"kazoku","en":"family","i":"u14:v1"},{"jp":"ちち","ro":"chichi","en":"my father","i":"u14:v2"},{"jp":"はは","ro":"haha","en":"my mother","i":"u14:v3"},{"jp":"あに","ro":"ani","en":"my older brother","i":"u14:v4"},{"jp":"あね","ro":"ane","en":"my older sister","i":"u14:v5"},{"jp":"おとうと","ro":"otōto","en":"younger brother","i":"u14:v6"},{"jp":"いもうと","ro":"imōto","en":"younger sister","i":"u14:v7"},{"jp":"ひとり","ro":"hitori","en":"one person","i":"u14:v8"}],"sents":[{"t":["わたし","の","ちち","は","せんせい","です"],"en":"My father is a teacher.","i":"u14:s1","ro":"watashi no chichi wa sensei desu"},{"t":["はは","は","よんじゅうごさい","です"],"en":"My mother is forty-five years old.","i":"u14:s2","ro":"haha wa yonjūgosai desu"},{"t":["あに","が","ひとり","います"],"en":"I have one older brother.","i":"u14:s3","ro":"ani ga hitori imasu"},{"t":["いもうと","は","じゅうごさい","です"],"en":"My younger sister is fifteen years old.","i":"u14:s4","ro":"imōto wa jūgosai desu"},{"t":["おとうと","は","がくせい","です"],"en":"My younger brother is a student.","i":"u14:s5","ro":"otōto wa gakusei desu"},{"t":["あね","は","とうきょう","に","います"],"en":"My older sister is in Tokyo.","i":"u14:s6","ro":"ane wa tōkyō ni imasu"},{"t":["かぞく","が","すき","です"],"en":"I like my family.","i":"u14:s7","ro":"kazoku ga suki desu"}]},{"id":"u15","title":"Shopping","jp":"かいもの","tip":"<b>いくらですか</b> = how much is it? <b>えん</b> = yen. Ask for things with <b>〜をください</b> = please give me ~.","vocab":[{"jp":"いくら","ro":"ikura","en":"how much","i":"u15:v1"},{"jp":"えん","ro":"en","en":"yen","i":"u15:v2"},{"jp":"ください","ro":"kudasai","en":"please give me","i":"u15:v3"},{"jp":"みせ","ro":"mise","en":"shop","i":"u15:v4"},{"jp":"やすい","ro":"yasui","en":"cheap","i":"u15:v5"},{"jp":"おかね","ro":"okane","en":"money","i":"u15:v6"},{"jp":"ひゃく","ro":"hyaku","en":"hundred","i":"u15:v7"},{"jp":"せん","ro":"sen","en":"thousand","i":"u15:v8"}],"sents":[{"t":["これ","は","いくら","です","か"],"en":"How much is this?","i":"u15:s1","ro":"kore wa ikura desu ka"},{"t":["ごひゃくえん","です"],"en":"It is five hundred yen.","i":"u15:s2","ro":"gohyakuen desu"},{"t":["みず","を","ください"],"en":"Water, please.","i":"u15:s3","ro":"mizu o kudasai"},{"t":["この","りんご","を","ください"],"en":"This apple, please.","i":"u15:s4","ro":"kono ringo o kudasai"},{"t":["その","かばん","は","たかい","です"],"en":"That bag is expensive.","i":"u15:s5","ro":"sono kaban wa takai desu"},{"t":["この","ペン","は","やすい","です"],"en":"This pen is cheap.","i":"u15:s6","ro":"kono pen wa yasui desu"},{"t":["せんえん","です"],"en":"It is one thousand yen.","i":"u15:s7","ro":"sen'en desu"},{"t":["おかね","が","ありません"],"en":"I have no money.","i":"u15:s8","ro":"okane ga arimasen"}]},{"id":"u16","title":"Let’s!","jp":"さそい","tip":"Invite politely with <b>〜ませんか</b> = “won’t you…?” and suggest with <b>〜ましょう</b> = “let’s….” たべませんか = won’t you eat (with me)? いきましょう = let’s go!","vocab":[{"jp":"いっしょに","ro":"issho ni","en":"together","i":"u16:v1"},{"jp":"こうえん","ro":"kōen","en":"park","i":"u16:v2"},{"jp":"カフェ","ro":"kafe","en":"cafe","i":"u16:v3"},{"jp":"あさごはん","ro":"asagohan","en":"breakfast","i":"u16:v4"},{"jp":"ひるごはん","ro":"hirugohan","en":"lunch","i":"u16:v5"},{"jp":"ばんごはん","ro":"bangohan","en":"dinner","i":"u16:v6"},{"jp":"いつ","ro":"itsu","en":"when","i":"u16:v7"}],"sents":[{"t":["いっしょに","たべませんか"],"en":"Won’t you eat together with me?","i":"u16:s1","ro":"isshoni tabemasenka"},{"t":["えいが","を","みませんか"],"en":"Won’t you watch a movie?","i":"u16:s2","ro":"eiga o mimasenka"},{"t":["カフェ","に","いきましょう"],"en":"Let’s go to a cafe.","i":"u16:s3","ro":"kafe ni ikimashō"},{"t":["ひるごはん","を","たべましょう"],"en":"Let’s eat lunch.","i":"u16:s4","ro":"hirugohan o tabemashō"},{"t":["こうえん","に","いきませんか"],"en":"Won’t you go to the park?","i":"u16:s5","ro":"kōen ni ikimasenka"},{"t":["いつ","いきます","か"],"en":"When will you go?","i":"u16:s6","ro":"itsu ikimasu ka"},{"t":["あさごはん","を","いっしょに","たべましょう"],"en":"Let’s eat breakfast together.","i":"u16:s7","ro":"asagohan o isshoni tabemashō"}]},{"id":"u17","title":"Weather & seasons","jp":"てんき","tip":"<b>ね</b> at the end seeks agreement — like adding “right?”: さむいです<b>ね</b> = cold, isn’t it? Seasons: はる・なつ・あき・ふゆ.","vocab":[{"jp":"てんき","ro":"tenki","en":"weather","i":"u17:v1"},{"jp":"あつい","ro":"atsui","en":"hot","i":"u17:v2"},{"jp":"さむい","ro":"samui","en":"cold","i":"u17:v3"},{"jp":"いい","ro":"ii","en":"good","i":"u17:v4"},{"jp":"あめ","ro":"ame","en":"rain","i":"u17:v5"},{"jp":"はれ","ro":"hare","en":"sunny","i":"u17:v6"},{"jp":"はる","ro":"haru","en":"spring","i":"u17:v7"},{"jp":"なつ","ro":"natsu","en":"summer","i":"u17:v8"},{"jp":"あき","ro":"aki","en":"autumn","i":"u17:v9"},{"jp":"ふゆ","ro":"fuyu","en":"winter","i":"u17:v10"}],"sents":[{"t":["きょう","は","あつい","です"],"en":"Today is hot.","i":"u17:s1","ro":"kyō wa atsui desu"},{"t":["さむい","です","ね"],"en":"It's cold, isn't it?","i":"u17:s2","ro":"samui desu ne"},{"t":["いい","てんき","です","ね"],"en":"Nice weather, isn't it?","i":"u17:s3","ro":"ii tenki desu ne"},{"t":["あした","は","あめ","です"],"en":"It will be rainy tomorrow.","i":"u17:s4","ro":"ashita wa ame desu"},{"t":["なつ","は","あつい","です"],"en":"Summer is hot.","i":"u17:s5","ro":"natsu wa atsui desu"},{"t":["ふゆ","は","さむい","です"],"en":"Winter is cold.","i":"u17:s6","ro":"fuyu wa samui desu"},{"t":["はる","が","すき","です"],"en":"I like spring.","i":"u17:s7","ro":"haru ga suki desu"},{"t":["きょう","は","はれ","です"],"en":"Today is sunny.","i":"u17:s8","ro":"kyō wa hare desu"}]},{"id":"u18","title":"Please…","jp":"〜てください","tip":"Recognize <b>〜てください</b> = “please do ~.” Learn these as whole phrases for now — how to build the て-form yourself comes later. They’re gold in any classroom or trip.","vocab":[{"jp":"みてください","ro":"mite kudasai","en":"please look","i":"u18:v1"},{"jp":"きいてください","ro":"kiite kudasai","en":"please listen","i":"u18:v2"},{"jp":"まってください","ro":"matte kudasai","en":"please wait","i":"u18:v3"},{"jp":"いってください","ro":"itte kudasai","en":"please say it","i":"u18:v4"},{"jp":"はなしてください","ro":"hanashite kudasai","en":"please speak","i":"u18:v5"},{"jp":"ゆっくり","ro":"yukkuri","en":"slowly","i":"u18:v6"},{"jp":"もういちど","ro":"mō ichido","en":"one more time","i":"u18:v7"},{"jp":"おねがいします","ro":"onegaishimasu","en":"please","i":"u18:v8"}],"sents":[{"t":["みてください"],"en":"Please look.","i":"u18:s1","ro":"mitekudasai"},{"t":["きいてください"],"en":"Please listen.","i":"u18:s2","ro":"kiitekudasai"},{"t":["ちょっと","まってください"],"en":"Please wait a moment.","i":"u18:s3","ro":"chotto mattekudasai"},{"t":["ゆっくり","はなしてください"],"en":"Please speak slowly.","i":"u18:s4","ro":"yukkuri hanashitekudasai"},{"t":["もういちど","いってください"],"en":"Please say it one more time.","i":"u18:s5","ro":"mōichido ittekudasai"},{"t":["もういちど","おねがいします"],"en":"One more time, please.","i":"u18:s6","ro":"mōichido onegaishimasu"},{"t":["すみません","ゆっくり","おねがいします"],"en":"Excuse me — slowly, please.","i":"u18:s7","ro":"sumimasen yukkuri onegaishimasu"}]}];
+
+/* =========================================================
+   LEARN — lesson path, exercise engine, SRS review, streak
+   (COURSE is injected above)
+   ========================================================= */
+const LESSONS_PER_UNIT=3;
+const IVL_DAYS=[1,3,7,14,30,60,120];
+const LKEY='sumi_learn_v1';
+let LSTATE=Store.get(LKEY,{done:{},xp:0,days:{},srs:{}});
+function saveL(){ Store.set(LKEY,LSTATE); }
+
+// item index: id -> {type:'v'|'s', unit, obj}
+const ITEMS={};
+COURSE.forEach(u=>{
+  u.vocab.forEach(v=>ITEMS[v.i]={type:'v',u,obj:v});
+  u.sents.forEach(s=>ITEMS[s.i]={type:'s',u,obj:s});
+});
+
+function todayStr(d){ d=d||new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+function addDaysStr(n){ const d=new Date(); d.setDate(d.getDate()+n); return todayStr(d); }
+function streakCount(){
+  const days=LSTATE.days; let n=0; const d=new Date();
+  if(!days[todayStr(d)]) d.setDate(d.getDate()-1);           // grace: count up to yesterday
+  while(days[todayStr(d)]){ n++; d.setDate(d.getDate()-1); }
+  return n;
+}
+function lessonsDone(){ let n=0; for(const k in LSTATE.done) n+=LSTATE.done[k]; return n; }
+function unitUnlocked(idx){ return true; } // all units open — progress may not persist across cleared storage
+function dueItems(){
+  const t=todayStr(); const out=[];
+  for(const id in LSTATE.srs){ if(LSTATE.srs[id].due<=t && ITEMS[id]) out.push(id); }
+  return out;
+}
+
+/* ---------------- learn stats strip ---------------- */
+function renderLearnStats(){
+  const total=COURSE.length*LESSONS_PER_UNIT;
+  const due=dueItems().length;
+  document.getElementById('stats').innerHTML=`
+    <div class="stat"><div class="n">${streakCount()}<span class="unit">🔥</span></div><div class="l">Day streak</div></div>
+    <div class="stat"><div class="n">${LSTATE.xp}<span class="unit">xp</span></div><div class="l">Total ink</div></div>
+    <div class="stat"><div class="n">${lessonsDone()}<span class="unit">/${total}</span></div><div class="l">Lessons</div></div>
+    <div class="stat"><div class="n">${due}</div><div class="l">Review due</div></div>`;
+}
+
+/* ---------------- path ---------------- */
+function renderLearnHome(){
+  const path=document.getElementById('learnPath'), stage=document.getElementById('learnStage');
+  stage.style.display='none'; stage.innerHTML=''; path.style.display='';
+  const due=dueItems().length;
+  let html=`<div class="unitcard review ${due?'':'zzz'}">
+    <div class="useal">復</div>
+    <div class="umain"><div class="utitle">Review</div>
+    <div class="usub">${due?due+' item'+(due>1?'s':'')+' ready — keep old ink fresh':'Nothing due — come back tomorrow'}</div></div>
+    ${due?'<button class="btn primary ubtn" data-review="1">Review</button>':''}
+  </div>`;
+  COURSE.forEach((u,idx)=>{
+    const d=LSTATE.done[u.id]||0;
+    const unlocked=unitUnlocked(idx);
+    const full=d>=LESSONS_PER_UNIT;
+    let dots='';
+    for(let li=0;li<LESSONS_PER_UNIT;li++){
+      const can=true;
+      dots+=`<button class="ldot ${li<d?'done':''}" data-u="${idx}" data-li="${li}" ${can?'':'disabled'} aria-label="Lesson ${li+1}${li<d?' (done)':''}">${li<d?'✓':li+1}</button>`;
+    }
+    html+=`<div class="unitcard ${unlocked?'':'locked'} ${full?'full':''}">
+      <div class="useal">${full?'済':idx+1}</div>
+      <div class="umain">
+        <div class="utitle">${u.title} <span class="ujp">${u.jp}</span></div>
+        <div class="udots">${dots}</div>
+      </div>
+      <button class="tipbtn" data-tip="${idx}" aria-label="Grammar tip">?</button>
+      ${unlocked?'':'<span class="lock">🔒</span>'}
+    </div>`;
+  });
+  html+=`<div class="path-end">The path grows with you — finish it, then tell me and we’ll add the next stage. 頑張って!</div>`;
+  path.innerHTML=html;
+  path.querySelectorAll('.ldot:not([disabled])').forEach(b=>b.addEventListener('click',()=>startLesson(+b.dataset.u,+b.dataset.li)));
+  path.querySelectorAll('.tipbtn').forEach(b=>b.addEventListener('click',()=>{
+    const u=COURSE[+b.dataset.tip];
+    showDrawer(`<div class="big" style="font-size:44px">${u.jp}</div>
+      <div class="k-mean">${u.title}</div>
+      <div class="note" style="margin-top:14px">${u.tip}</div>`);
+  }));
+  const rb=path.querySelector('[data-review]'); if(rb) rb.addEventListener('click',startReview);
+}
+
+/* ---------------- exercise generation ---------------- */
+function pickN(arr,n){ return shuffle(arr).slice(0,n); }
+function exMCV(v,dir,unit){
+  const pool=pickN(unit.vocab.filter(x=>x.i!==v.i),3).concat([v]);
+  return {k:'mcv',dir,v,opts:shuffle(pool),item:v.i};
+}
+function exMCS(s,unit){
+  const pool=pickN(unit.sents.filter(x=>x.i!==s.i),3).concat([s]);
+  return {k:'mcs',s,opts:shuffle(pool),item:s.i};
+}
+function jpDistractors(unit,tokens,n){
+  let pool=[];
+  COURSE.forEach(u=>u.sents.forEach(s=>pool.push(...s.t)));
+  pool=[...new Set(pool)].filter(t=>!tokens.includes(t));
+  return pickN(pool,n);
+}
+function enWords(en){ return en.replace(/[.,?!—;:"“”]/g,'').split(/\s+/).filter(Boolean); }
+function enDistractors(tokens,n){
+  let pool=[];
+  const lower=tokens.map(t=>t.toLowerCase());
+  COURSE.forEach(u=>u.sents.forEach(s=>pool.push(...enWords(s.en))));
+  pool=[...new Set(pool)].filter(t=>!lower.includes(t.toLowerCase()));
+  return pickN(pool,n);
+}
+function exBuildJ(s,unit,listen){
+  const bank=shuffle(s.t.concat(jpDistractors(unit,s.t,Math.min(3,Math.max(2,8-s.t.length)))));
+  return {k:listen?'listen':'buildj',s,bank,item:s.i};
+}
+function exBuildE(s){
+  const ans=enWords(s.en);
+  const bank=shuffle(ans.concat(enDistractors(ans,Math.min(3,Math.max(2,9-ans.length)))));
+  return {k:'builde',s,ans,bank,item:s.i};
+}
+function exMatch(unit){
+  const vs=pickN(unit.vocab,4);
+  return {k:'match',pairs:vs,item:null};
+}
+function genLesson(u,li){
+  const q=[];
+  if(li===0) q.push({k:'tip',u});
+  const vs=pickN(u.vocab,4);
+  q.push(exMCV(vs[0],'j2e',u));
+  q.push(exMCV(vs[1],'e2j',u));
+  q.push(exMatch(u));
+  const ss=pickN(u.sents,Math.min(6,u.sents.length));
+  q.push(exBuildJ(ss[0],u,false));
+  q.push(exMCS(ss[1],u));
+  q.push(exBuildE(ss[2]));
+  q.push(exBuildJ(ss[3],u,false));
+  if(ss[4]) q.push(jaVoice? exBuildJ(ss[4],u,true) : exMCS(ss[4],u));
+  if(li>0 && ss[5]) q.push(exBuildE(ss[5]));
+  return q;
+}
+function genReview(ids){
+  return ids.map(id=>{
+    const it=ITEMS[id];
+    if(it.type==='v') return exMCV(it.obj, Math.random()<0.5?'j2e':'e2j', it.u);
+    return Math.random()<0.6? exBuildJ(it.obj,it.u,false) : exMCS(it.obj,it.u);
+  });
+}
+
+/* ---------------- lesson runtime ---------------- */
+let L=null;
+const PRAISE=['すごい! Nice.','いいね! Good one.','完璧! Perfect.','正解! Correct.','その調子! Keep it up.'];
+function startLesson(uIdx,li){ L={queue:genLesson(COURSE[uIdx],li),i:0,u:COURSE[uIdx],li,mistakes:0,firstTry:{},requeued:{},isReview:false}; runEx(); }
+function startReview(){
+  const ids=pickN(dueItems(),10);
+  if(!ids.length) return;
+  L={queue:genReview(ids),i:0,u:null,li:0,mistakes:0,firstTry:{},requeued:{},isReview:true};
+  runEx();
+}
+function lsnShell(inner,progress){
+  return `<div class="lsn-top">
+      <button class="lsn-x" id="lsnX" aria-label="Quit lesson">×</button>
+      <div class="pbar lsn-pbar"><i style="width:${progress}%"></i></div>
+    </div>${inner}`;
+}
+function runEx(){
+  const path=document.getElementById('learnPath'), stage=document.getElementById('learnStage');
+  path.style.display='none'; stage.style.display='';
+  if(L.i>=L.queue.length){ return endLesson(); }
+  const ex=L.queue[L.i];
+  const prog=Math.round(L.i/L.queue.length*100);
+  let inner='';
+  if(ex.k==='tip'){
+    inner=`<div class="lsn-body"><div class="lsn-label">New ink · ${ex.u.title}</div>
+      <div class="tipcard"><div class="tipjp">${ex.u.jp}</div>${ex.u.tip}</div></div>
+      <div class="lsn-foot"><button class="btn primary wide" id="lsnMain">Start →</button></div>`;
+  }
+  else if(ex.k==='mcv'){
+    const q=ex.dir==='j2e'?ex.v.jp:ex.v.en;
+    const lbl=ex.dir==='j2e'?'What does this mean?':'Pick the Japanese';
+    inner=`<div class="lsn-body"><div class="lsn-label">${lbl}</div>
+      <div class="lsn-q ${ex.dir==='j2e'?'jpq':''}">${q}${ex.dir==='j2e'&&speakAvail()?' <button class="spk" data-say="'+ex.v.jp+'">🔊</button>':''}</div>
+      <div class="choices lsn-choices">${ex.opts.map((o,i)=>`<button class="choice ${ex.dir==='e2j'?'':'roman'}" data-i="${i}">${ex.dir==='j2e'?o.en:o.jp}</button>`).join('')}</div></div>
+      <div class="lsn-foot"><button class="btn primary wide" id="lsnMain" disabled>Check</button></div>`;
+  }
+  else if(ex.k==='mcs'){
+    inner=`<div class="lsn-body"><div class="lsn-label">What does this sentence mean?</div>
+      <div class="lsn-q jpq sent">${ex.s.t.join(' ')}${speakAvail()?' <button class="spk" data-say="'+ex.s.t.join('')+'">🔊</button>':''}</div>
+      <div class="lsn-ro">${ex.s.ro}</div>
+      <div class="choices lsn-choices">${ex.opts.map((o,i)=>`<button class="choice roman" data-i="${i}">${o.en}</button>`).join('')}</div></div>
+      <div class="lsn-foot"><button class="btn primary wide" id="lsnMain" disabled>Check</button></div>`;
+  }
+  else if(ex.k==='buildj'||ex.k==='listen'){
+    const prompt = ex.k==='listen'
+      ? `<div class="lsn-q listenq"><button class="bigspk" data-say="${ex.s.t.join('')}">🔊</button><button class="bigspk slow" data-say="${ex.s.t.join('')}" data-slow="1">🐢</button></div>`
+      : `<div class="lsn-q enq">${ex.s.en}</div>`;
+    inner=`<div class="lsn-body"><div class="lsn-label">${ex.k==='listen'?'Tap what you hear':'Build it in Japanese'}</div>
+      ${prompt}
+      <div class="built" id="built"></div>
+      <div class="bank" id="bank">${ex.bank.map((t,i)=>`<button class="chip" data-i="${i}" data-t="${t}">${t}</button>`).join('')}</div></div>
+      <div class="lsn-foot"><button class="btn primary wide" id="lsnMain" disabled>Check</button></div>`;
+  }
+  else if(ex.k==='builde'){
+    inner=`<div class="lsn-body"><div class="lsn-label">Build it in English</div>
+      <div class="lsn-q jpq sent">${ex.s.t.join(' ')}${speakAvail()?' <button class="spk" data-say="'+ex.s.t.join('')+'">🔊</button>':''}</div>
+      <div class="lsn-ro">${ex.s.ro}</div>
+      <div class="built" id="built"></div>
+      <div class="bank" id="bank">${ex.bank.map((t,i)=>`<button class="chip roman" data-i="${i}" data-t="${t}">${t}</button>`).join('')}</div></div>
+      <div class="lsn-foot"><button class="btn primary wide" id="lsnMain" disabled>Check</button></div>`;
+  }
+  else if(ex.k==='match'){
+    const left=shuffle(ex.pairs.map(p=>({t:p.jp,id:p.i})));
+    const right=shuffle(ex.pairs.map(p=>({t:p.en,id:p.i})));
+    inner=`<div class="lsn-body"><div class="lsn-label">Match the pairs</div>
+      <div class="mgrid">
+        <div class="mcol">${left.map(o=>`<button class="mopt jp" data-id="${o.id}" data-side="l">${o.t}</button>`).join('')}</div>
+        <div class="mcol">${right.map(o=>`<button class="mopt roman" data-id="${o.id}" data-side="r">${o.t}</button>`).join('')}</div>
+      </div></div>
+      <div class="lsn-foot"><button class="btn primary wide" id="lsnMain" disabled>Continue</button></div>`;
+  }
+  document.getElementById('learnStage').innerHTML=lsnShell(inner,prog);
+  wireEx(ex);
+}
+function wireEx(ex){
+  const stage=document.getElementById('learnStage');
+  stage.querySelectorAll('[data-say]').forEach(b=>b.addEventListener('click',()=>{
+    const u=new SpeechSynthesisUtterance(b.dataset.say); u.lang='ja-JP'; if(jaVoice)u.voice=jaVoice;
+    u.rate=b.dataset.slow?0.5:0.8; speechSynthesis.cancel(); speechSynthesis.speak(u);
+  }));
+  document.getElementById('lsnX').onclick=()=>{ if(confirm('Quit this lesson? Progress in it is lost.')) renderLearnHome(); };
+  const main=document.getElementById('lsnMain');
+  if(ex.k==='tip'){ main.onclick=()=>{ L.i++; runEx(); }; if(ex.u && speakAvail()) speak(ex.u.jp); return; }
+  if(ex.k==='mcv'||ex.k==='mcs'){
+    let sel=-1;
+    stage.querySelectorAll('.choice').forEach(b=>b.addEventListener('click',()=>{
+      if(main.dataset.checked) return;
+      sel=+b.dataset.i;
+      stage.querySelectorAll('.choice').forEach(x=>x.classList.toggle('picked',x===b));
+      main.disabled=false;
+    }));
+    main.onclick=()=>{
+      if(main.dataset.checked) return;
+      const ok = ex.k==='mcv' ? ex.opts[sel].i===ex.v.i : ex.opts[sel].i===ex.s.i;
+      stage.querySelectorAll('.choice').forEach(b=>{
+        const idx=+b.dataset.i;
+        const isAns = ex.k==='mcv'? ex.opts[idx].i===ex.v.i : ex.opts[idx].i===ex.s.i;
+        b.disabled=true; if(isAns)b.classList.add('correct'); else if(idx===sel)b.classList.add('wrong');
+      });
+      finishEx(ex,ok);
+    };
+    if(ex.k==='listen'||(ex.k==='mcs'&&speakAvail())){} // no auto
+  }
+  if(ex.k==='buildj'||ex.k==='builde'||ex.k==='listen'){
+    const built=document.getElementById('built'), bank=document.getElementById('bank');
+    function sync(){ main.disabled=!built.children.length; }
+    bank.querySelectorAll('.chip').forEach(c=>c.addEventListener('click',()=>{
+      if(main.dataset.checked||c.classList.contains('used')) return;
+      c.classList.add('used');
+      const b=document.createElement('button');
+      b.className='chip built-chip'+(ex.k==='builde'?' roman':''); b.textContent=c.dataset.t; b.dataset.src=c.dataset.i;
+      b.addEventListener('click',()=>{ if(main.dataset.checked)return; c.classList.remove('used'); b.remove(); sync(); });
+      built.appendChild(b); sync();
+    }));
+    main.onclick=()=>{
+      if(main.dataset.checked) return;
+      const got=[...built.children].map(b=>b.textContent);
+      const want = ex.k==='builde'? ex.ans : ex.s.t;
+      const ok = got.length===want.length && got.every((t,i)=>t===want[i]);
+      finishEx(ex,ok);
+    };
+    if(ex.k==='listen'){ const bs=stage.querySelector('.bigspk'); if(bs) bs.click(); }
+  }
+  if(ex.k==='match'){
+    let pick=null, matched=0, wrongs=0;
+    stage.querySelectorAll('.mopt').forEach(b=>b.addEventListener('click',()=>{
+      if(b.classList.contains('done')) return;
+      if(!pick){ pick=b; b.classList.add('picked'); return; }
+      if(pick===b){ b.classList.remove('picked'); pick=null; return; }
+      if(pick.dataset.side===b.dataset.side){ pick.classList.remove('picked'); pick=b; b.classList.add('picked'); return; }
+      if(pick.dataset.id===b.dataset.id){
+        pick.classList.remove('picked'); pick.classList.add('done'); b.classList.add('done');
+        matched++; pick=null;
+        if(matched===4){ main.disabled=false; main.onclick=()=>{ finishEx(ex,wrongs===0,true); }; }
+      } else {
+        wrongs++; b.classList.add('shake'); pick.classList.add('shake');
+        const a=pick; setTimeout(()=>{a.classList.remove('shake','picked');b.classList.remove('shake');},350); pick=null;
+      }
+    }));
+  }
+}
+function finishEx(ex,ok,silent){
+  const main=document.getElementById('lsnMain');
+  main.dataset.checked='1';
+  if(ex.item && !(ex.item in L.firstTry)) L.firstTry[ex.item]=ok;
+  if(!ok){
+    L.mistakes++;
+    if(ex.item && !L.requeued[ex.item]){ L.requeued[ex.item]=1; L.queue.push({...ex}); }
+  }
+  const ans = ex.k==='mcv' ? `${ex.v.jp} — ${ex.v.en}`
+            : ex.k==='match' ? ''
+            : `${ex.s.t.join(' ')} — ${ex.s.en}`;
+  const sayTxt = ex.k==='mcv'? ex.v.jp : (ex.s? ex.s.t.join(''):'');
+  const fb=document.createElement('div');
+  fb.className='fbanner '+(ok?'good':'bad');
+  fb.innerHTML=`<div class="fb-head">${ok? PRAISE[Math.floor(Math.random()*PRAISE.length)] : 'Not quite — correct answer:'}</div>
+    ${ans?`<div class="fb-ans">${ans} ${sayTxt&&speakAvail()?`<button class="spk" data-say="${sayTxt}">🔊</button>`:''}</div>`:''}`;
+  document.getElementById('learnStage').appendChild(fb);
+  fb.querySelectorAll('[data-say]').forEach(b=>b.addEventListener('click',()=>speak(b.dataset.say)));
+  main.textContent='Continue'; main.disabled=false;
+  main.onclick=()=>{ L.i++; runEx(); };
+  if(silent){ fb.remove(); L.i++; runEx(); }
+}
+function endLesson(){
+  const stage=document.getElementById('learnStage');
+  const perfect=L.mistakes===0;
+  const xp=L.isReview? 10 : 10+(perfect?5:0);
+  // record progress
+  const t=todayStr();
+  LSTATE.xp+=xp; LSTATE.days[t]=(LSTATE.days[t]||0)+xp;
+  if(L.isReview){
+    for(const id in L.firstTry){
+      const e=LSTATE.srs[id]||{ivl:0};
+      if(L.firstTry[id]) e.ivl=Math.min(e.ivl+1,IVL_DAYS.length-1); else e.ivl=0;
+      e.due=addDaysStr(IVL_DAYS[e.ivl]);
+      LSTATE.srs[id]=e;
+    }
+  } else {
+    const d=LSTATE.done[L.u.id]||0;
+    if(L.li>=d) LSTATE.done[L.u.id]=L.li+1;
+    for(const id in L.firstTry){
+      if(!LSTATE.srs[id]) LSTATE.srs[id]={ivl:0,due:addDaysStr(1)};
+    }
+  }
+  saveL(); renderLearnStats();
+  const acc = Object.keys(L.firstTry).length? Math.round(Object.values(L.firstTry).filter(Boolean).length/Object.keys(L.firstTry).length*100):100;
+  stage.innerHTML=`<div class="lsn-end">
+      <div class="end-seal">${perfect?'完璧':'済'}</div>
+      <div class="end-title">${L.isReview?'Review done!':'Lesson complete!'}</div>
+      <div class="end-stats">
+        <div class="estat"><b>+${xp}</b><span>ink (XP)</span></div>
+        <div class="estat"><b>${acc}%</b><span>first-try</span></div>
+        <div class="estat"><b>${streakCount()}🔥</b><span>day streak</span></div>
+      </div>
+      ${perfect&&!L.isReview?'<div class="end-note">Flawless — bonus ink earned.</div>':''}
+      <button class="btn primary wide" id="endBtn">Continue</button>
+    </div>`;
+  document.getElementById('endBtn').onclick=renderLearnHome;
+}
+
 // init
-renderStats();
-renderChart();
+setMode('learn');
 if(!Store.persistent){
   // gentle, non-blocking note in footer if storage unavailable
   const f=document.querySelector('footer span');
